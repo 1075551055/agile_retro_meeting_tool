@@ -1,6 +1,6 @@
 <template>
   <!--自适应容器  -->
-  <b-container>
+  <b-container class="header">
     <b-navbar toggleable="md" type="dark" variant="info">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
@@ -14,11 +14,11 @@
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
+        <b-navbar-nav class="ml-auto action">
           <b-nav-item-dropdown right>
             <!-- Using button-content slot -->
             <template slot="button-content">
-              <em>User</em>
+              <em>Action</em>
             </template>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -43,26 +43,32 @@ export default {};
   max-width: 100%;
 }
 
-.comment{
-  &.navbar-nav{
-    width: 96%;
-  }
-  .nav-item{
-    width: 32%;
-    text-align: center;
-  }
-}
-
-.bg-info{
-  background-color: #43A047 !important;
-}
-
-.navbar-dark{
-  .navbar-nav{
-    .nav-link{
-      color: #fff;
+.header {
+  // well , not well, suggestions
+  .comment {
+    &.navbar-nav {
+      width: 100%;
+    }
+    .nav-item {
+      width: 33.333333%;
+      text-align: center;
     }
   }
-} 
+  .bg-info {
+    background-color: #43a047 !important;
+  }
+  .navbar-dark {
+    .navbar-nav {
+      .nav-link {
+        color: #fff;
+      }
+    }
+  }
+  // action
+  .action {
+    position: fixed;
+    right: 0;
+  }
+}
 </style>
 
