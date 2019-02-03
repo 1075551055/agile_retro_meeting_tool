@@ -9,7 +9,7 @@
 
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav class="comment">
-            <b-nav-item href="#"><i class="iconfont icon-biaoqing-kaixin"></i> Well</b-nav-item>
+            <b-nav-item href="#"><i class="iconfont icon-biaoqing1"></i> Well</b-nav-item>
             <b-nav-item href="#"><i class="iconfont icon-biaoqing-nanguo"></i>Not Well</b-nav-item>
             <b-nav-item href="#"><i class="iconfont icon-jianyi"></i>Suggestions</b-nav-item>
           </b-navbar-nav>
@@ -19,9 +19,30 @@
     <!-- content -->
     <b-container class="content">
       <b-row>
-        <b-col>1 of 3</b-col>
-        <b-col>2 of 3</b-col>
-        <b-col>3 of 3</b-col>
+        <b-col>1 of 3
+          <div class="bottom">
+            <div class="fake-textarea">
+              <a href="" class="iconfont icon-jiahao"></a>
+              <div contenteditable="true"></div>
+            </div>
+          </div>
+        </b-col>
+        <b-col>2 of 3
+          <div class="bottom">
+            <div class="fake-textarea">
+              <a href="" class="iconfont icon-jiahao"></a>
+              <div contenteditable="true"></div>
+            </div>
+          </div>
+        </b-col>
+        <b-col>3 of 3
+          <div class="bottom">
+            <div class="fake-textarea">
+              <a href="" class="iconfont icon-jiahao"></a>
+              <div contenteditable="true"></div>
+            </div>
+          </div>
+        </b-col>
     </b-row>
     </b-container>
   </b-container>
@@ -46,10 +67,7 @@ export default {};
   // well , not well, suggestions header
   .comment {
     &.navbar-nav {
-      width: 100%;
-      li {
-        // border: 1px solid red;
-      }
+      width: 100%
     }
     .nav-item {
       width: 33.333333%;
@@ -78,7 +96,59 @@ export default {};
     margin-right: 0;
     .col{
       border-right: 1px dashed #ccc;
-      height: 200px;
+      height: 490px;
+      //remove gutter's padding:15px
+      // padding-left: 0;
+      // padding-right: 0;
+      position: relative;
+      .bottom {
+        position: absolute;
+        bottom: 0;
+        // css3 calc, gutter's padding is 15px
+        // width: calc(100% - 15px);
+        // width: -webkit-calc(100% - 15px); 
+        // width: -moz-calc(100% - 15px); 
+        // 100% is parent posistioned element content width + padding
+        width: 100%;
+        border-top: 1px dashed #ccc;
+        border-right: 1px dashed #ccc;
+        padding:6px;
+        margin-left: -15px;
+        .fake-textarea{
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          box-shadow: 5px 5px 8px rgba(0, 0, 0, .5);
+          // -webkit-user-modify: read-write-plaintext-only;
+          // min-height: 60px;
+          // max-height: 120px;
+          // overflow: auto;
+          // outline: none;
+          position: relative;
+          > div{
+            display: inline-block;
+            min-height: 60px;
+            max-height: 120px;
+            width: 100%;
+            height: 100%;
+            width: calc(100% - 45px);
+            width: -webkit-calc(100% - 45px); 
+            width: -moz-calc(100% - 45px); 
+            margin-left: 45px;
+            overflow: auto;
+            outline: none;
+            // border: 1px solid red;
+          }
+          > a {
+            display: inline;
+            position: absolute;
+            top:50%;
+            transform: translateY(-50%);
+            padding-left: 8px;
+            font-size: 30px;
+            color: #aaa;
+          }
+        }
+      }
     }
   }
 }
