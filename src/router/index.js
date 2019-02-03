@@ -4,8 +4,6 @@ import Router from 'vue-router'
 import HeaderTab from '@/components/HeaderTab'
 import Action from '@/components/Action'
 import Comment from '@/components/Comment'
-import CommentHeader from '@/components/CommentHeader'
-import CommentContent from '@/components/CommentContent'
 
 Vue.use(Router)
 

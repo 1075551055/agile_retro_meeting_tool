@@ -9,9 +9,9 @@
 
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav class="comment">
-            <b-nav-item href="#">Well</b-nav-item>
-            <b-nav-item href="#">Not Well</b-nav-item>
-            <b-nav-item href="#">Suggestions</b-nav-item>
+            <b-nav-item href="#"><i class="iconfont icon-biaoqing-kaixin"></i> Well</b-nav-item>
+            <b-nav-item href="#"><i class="iconfont icon-biaoqing-nanguo"></i>Not Well</b-nav-item>
+            <b-nav-item href="#"><i class="iconfont icon-jianyi"></i>Suggestions</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
