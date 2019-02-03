@@ -12,16 +12,6 @@
           <b-nav-item href="#">Not Well</b-nav-item>
           <b-nav-item href="#">Suggestions</b-nav-item>
         </b-navbar-nav>
-
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto action">
-          <b-nav-item-dropdown right>
-            <!-- Using button-content slot -->
-            <template slot="button-content">
-              <em>Action</em>
-            </template>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
       </b-collapse>
     </b-navbar>
   </b-container>
@@ -37,14 +27,15 @@ export default {};
 // https://inside.com/
 
 <style lang="less" scoped>
-.container {
-  width: 100%;
-  // override bootstrap "container" class max-width
-  max-width: 100%;
-}
-
 .header {
-  // well , not well, suggestions
+  &.container {
+    width: 100%;
+    // override bootstrap "container" class max-width
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  // well , not well, suggestions header
   .comment {
     &.navbar-nav {
       width: 100%;
@@ -63,11 +54,6 @@ export default {};
         color: #fff;
       }
     }
-  }
-  // action
-  .action {
-    position: fixed;
-    right: 0;
   }
 }
 </style>

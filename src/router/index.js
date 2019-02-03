@@ -1,24 +1,34 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
-import Header from '@/components/Header'
-import Main from '@/components/Main'
+import HeaderTab from '@/components/HeaderTab'
+import Action from '@/components/Action'
+import Comment from '@/components/Comment'
+import CommentHeader from '@/components/CommentHeader'
+import CommentContent from '@/components/CommentContent'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'HelloWorld',
-    //   component: HelloWorld
-    // },
     {
+      // route nest naming route-view
       path: '/',
-      components:{
-        'header': Header,
-        'main': Main
-      }
+      // will meet some warning about child route if after config children routes. 
+      // Because config "name", the router will contains a default child route, but will render our conig children routes
+      // name: 'HeaderTab',
+      component: HeaderTab,
+      children:[{
+        // config "/" or "" is ok
+        path: '',
+        components: {
+          'comment': Comment,
+          // 'commentHeader': CommentHeader,
+          // 'commentContent': CommentContent,
+          'action': Action
+        }
+      }]
     }
+
   ]
 })
