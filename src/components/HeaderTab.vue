@@ -31,3 +31,15 @@ export default {};
   padding-right: 0;
 }
 </style>
+
+<style lang="less">
+.nav-tabs{
+  // background-color: #43a047;
+  // a{
+  //   font-size: 14px;
+  //   font-family: 'Open Sans', sans-serif;
+  //   font-weight: 400;
+  // }
+}
+</style>
+

@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  // https://cn.vuejs.org/v2/api/#name
   name: 'App'
 }
 </script>
@@ -22,7 +23,8 @@ export default {
   /* text-align: center; */
   /* color: #2c3e50; */
   /* margin-top: 60px; */
-  background-color: #F8F4F3;
+  /* background-color: #F8F4F3; */
+  background-color: #f5f5f5;
   height: 100%;
 }
 </style>
