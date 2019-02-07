@@ -58,8 +58,7 @@
             <div
               contenteditable="true"
               draggable="true"
-              :id="wellCommentTextarea[0].id"
-              :ref="wellCommentTextarea[0].ref"
+              :id="$store.state.comment.wellComments[0].id"
               data-commenttype="well"
             ></div>
           </div>
@@ -98,29 +97,6 @@ import { uuid } from "vue-uuid";
 export default {
   data: function() {
     return {
-      wellCommentTextarea: [
-        {
-          id: uuid.v1(),
-          ref: uuid.v1()
-        }
-      ],
-      notwellCommentTextarea: [
-        {
-          id: uuid.v1(),
-          ref: uuid.v1()
-        }
-      ],
-      suggestionCommentTextarea: [
-        {
-          id: uuid.v1(),
-          ref: uuid.v1()
-        }
-      ],
-      commentTypes: {
-        well: "well",
-        notwell: "notwell",
-        suggestion: "suggestion"
-      }
     };
   },
   methods: {
