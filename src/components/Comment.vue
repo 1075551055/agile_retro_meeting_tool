@@ -26,49 +26,47 @@
     <b-container class="content">
       <b-row>
         <b-col class="summary-comment-col">
-            <div v-for="(item, index) in $store.state.comment.wellComments" :key="index">test</div>
+          <!-- bind commentId and commentContent, then tranfer to child component:CommentCard -->
+            <CommentCard v-show="$store.state.comment.wellComments.length != 0" v-for="(item) in $store.state.comment.wellComments" :key="item.id" 
+            v-bind:commentId="item.id" v-bind:commentContent="item.content"></CommentCard>
         </b-col>
         <b-col class="summary-comment-col">
-          
+           <CommentCard v-show="$store.state.comment.notWellComments.length != 0" v-for="(item) in $store.state.comment.notWellComments" :key="item.id" 
+            v-bind:commentId="item.id" v-bind:commentContent="item.content"></CommentCard>
         </b-col>
         <b-col class="summary-comment-col">
-          
+           <CommentCard v-show="$store.state.comment.suggestionComments.length != 0" v-for="(item) in $store.state.comment.suggestionComments" :key="item.id" 
+            v-bind:commentId="item.id" v-bind:commentContent="item.content"></CommentCard>
         </b-col>
       </b-row>
       <b-row>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
             <a href class="iconfont icon-jiahao"></a>
-            <!-- <div contenteditable="true" draggable="true" @input="changeData($event)"></div> -->
             <div
               contenteditable="true"
               draggable="true"
-              :id="$store.state.comment.wellComments[0].id"
-              data-commenttype="well"
+              :data-commenttype="commentType.well" @input="changeCommentData($event, commentType.well)"
             ></div>
           </div>
         </b-col>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
             <a href class="iconfont icon-jiahao"></a>
-            <!-- <div contenteditable="true" draggable="true" @input="changeData($event)"></div> -->
             <div
               contenteditable="true"
               draggable="true"
-              :id="$uuid.v1()"
-              data-commenttype="notwell"
+              :data-commenttype="commentType.notWell" @input="changeCommentData($event, commentType.notWell)"
             ></div>
           </div>
         </b-col>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
             <a href class="iconfont icon-jiahao"></a>
-            <!-- <div contenteditable="true" draggable="true" @input="changeData($event)"></div> -->
             <div
               contenteditable="true"
               draggable="true"
-              :id="$uuid.v1()"
-              data-commenttype="suggestion"
+              :data-commenttype="commentType.suggestion" @input="changeCommentData($event, commentType.suggestion)"
             ></div>
           </div>
         </b-col>
@@ -79,47 +77,52 @@
 
 <script>
 import { uuid } from "vue-uuid";
-
+import CommentCard from './CommentCard';
+import constants from '@/constants'
 export default {
   data: function() {
     return {
+      comment: constants.comment,
+      commentType: constants.commentType
     };
   },
   components:{
-    HelloWorld
+    CommentCard
   },
   methods: {
-    changeData: function(event) {
+    changeCommentData: function(event, commentType) {
       // this.msg = event.target.innerText;
+      if(commentType === this.commentType.well){
+          this.comment.wellComment = event.target.innerText;
+      }
+      if(commentType === this.commentType.notWell){
+          this.comment.notWellComment = event.target.innerText;
+      }
+       if(commentType === this.commentType.suggestion){
+          this.comment.suggestionComment = event.target.innerText;
+      }
     },
     setDragDrop: function() {
-      // this.$refs.
       let fakeTextAreas = document.querySelectorAll(".fake-textarea > div");
       [].forEach.call(fakeTextAreas, el => {
         let self = this;
         el.ondragstart = function(e) {
           // drag start
-          //console.log("dragstart");
           e.dataTransfer.setData(
             "text/html",
             JSON.stringify({
-              id: e.target.id,
               commentType: e.target.dataset.commenttype
             })
           );
-          console.log(e.target.dataset.commenttype);
-          // console.log(self.$refs[self.wellCommentTextarea[0].ref]);
         };
         el.ondragend = function(e) {
           // after mouseup will trigger dragend
-          // console.log("dragend");
         };
         el.ondrag = function(e) {
           // continue to trigger during drag
         };
         el.ondragleave = function(e) {
           // will trigger dragleave when cursor leave the element
-          // console.log("dragleave");
         };
       });
 
@@ -132,18 +135,22 @@ export default {
           e.preventDefault();
         };
         el.ondrop = function(e) {
-          let idAndCommentTypeJson = JSON.parse(
+          let commentJson = JSON.parse(
             e.dataTransfer.getData("text/html")
           );
-          let id = idAndCommentTypeJson.id;
-          let commentType = idAndCommentTypeJson.commentType;
-          if (commentType === self.commentTypes.well) {
+          let payload = {};
+          let commentType = commentJson.commentType;
+          payload.commentType = commentType;
+          if (commentType === self.commentType.well) {
+             payload.commentContent = self.comment.wellComment;
           }
-          // self.$refs[self.wellCommentTextarea[0].ref]
-          let originalCommentEle = document.getElementById(id);
-          let parentElement = originalCommentEle.parentElement;
-          originalCommentEle.style = "width: 45%; height: 35%; display: inline-block; border:1px solid pink; overflow: auto; margin: 3px; background-color: #fff ; box-shadow: 3px 3px 6px #43a047";
-          e.target.appendChild(originalCommentEle);
+          if (commentType === self.commentType.notWell) {
+             payload.commentContent = self.comment.notWellComment;
+          }
+          if (commentType === self.commentType.suggestion) {
+             payload.commentContent = self.comment.suggestionComment;
+          }
+          self.$store.dispatch('comment/addComment', payload);
         };
         
         el.ondragleave = function(e) {
