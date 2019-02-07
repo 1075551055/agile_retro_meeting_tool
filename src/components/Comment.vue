@@ -47,7 +47,7 @@
               contenteditable="true"
               draggable="true"
               :data-commenttype="commentType.well" @input="changeCommentData($event, commentType.well)"
-            ></div>
+            >{{comment.wellComment}}</div>
           </div>
         </b-col>
         <b-col class="comment-col">
@@ -108,12 +108,12 @@ export default {
         let self = this;
         el.ondragstart = function(e) {
           // drag start
-          // e.dataTransfer.setData(
-          //   "text/html",
-          //   JSON.stringify({
-          //     commentType: e.target.dataset.commenttype
-          //   })
-          // );
+          e.dataTransfer.setData(
+            "text/html",
+            JSON.stringify({
+              commentType: e.target.dataset.commenttype
+            })
+          );
         };
         el.ondragend = function(e) {
           // after mouseup will trigger dragend
@@ -135,21 +135,29 @@ export default {
           e.preventDefault();
         };
         el.ondrop = function(e) {
-          // let commentJson = JSON.parse(
-          //   e.dataTransfer.getData("text/html")
-          // );
-          let commentType = e.target.dataset.commenttype;
-          let payload = { commentType };
-          if (commentType === self.commentType.well) {
+          let fakeCommentTextareaTypeJson = JSON.parse(
+            e.dataTransfer.getData("text/html")
+          );
+          let fakeCommentTextareaType = fakeCommentTextareaTypeJson.commentType;
+          let droppedAreaType = e.target.dataset.commenttype;
+          let payload = { commentType: droppedAreaType };
+          if (fakeCommentTextareaType === self.commentType.well) {
              payload.commentContent = self.comment.wellComment;
+             // clear fake comment textarea data
+             self.comment.wellComment = '';
           }
-          if (commentType === self.commentType.notWell) {
+          if (fakeCommentTextareaType === self.commentType.notWell) {
              payload.commentContent = self.comment.notWellComment;
+             // clear fake comment textarea data
+             self.comment.notWellComment = '';
           }
-          if (commentType === self.commentType.suggestion) {
+          if (fakeCommentTextareaType === self.commentType.suggestion) {
              payload.commentContent = self.comment.suggestionComment;
+             // clear fake comment textarea data
+             self.comment.suggestionComment = '';
           }
           self.$store.dispatch('comment/addComment', payload);
+
         };
         
         el.ondragleave = function(e) {
