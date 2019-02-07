@@ -26,28 +26,13 @@
     <b-container class="content">
       <b-row>
         <b-col class="summary-comment-col">
-          <!-- <div class="bottom">
-            <div class="fake-textarea" draggable="true">
-              <a href class="iconfont icon-jiahao"></a>
-              <div contenteditable="true" draggable="true" id="mytest"></div>
-            </div>
-          </div>-->
+            <div v-for="(item, index) in $store.state.comment.wellComments" :key="index">test</div>
         </b-col>
         <b-col class="summary-comment-col">
-          <!-- <div class="bottom">
-            <div class="fake-textarea" draggable="true">
-              <a href class="iconfont icon-jiahao"></a>
-              <div contenteditable="true"></div>
-            </div>
-          </div>-->
+          
         </b-col>
         <b-col class="summary-comment-col">
-          <!-- <div class="bottom">
-            <div class="fake-textarea" draggable="true">
-              <a href class="iconfont icon-jiahao"></a>
-              <div contenteditable="true"></div>
-            </div>
-          </div>-->
+          
         </b-col>
       </b-row>
       <b-row>
@@ -94,10 +79,14 @@
 
 <script>
 import { uuid } from "vue-uuid";
+
 export default {
   data: function() {
     return {
     };
+  },
+  components:{
+    HelloWorld
   },
   methods: {
     changeData: function(event) {
