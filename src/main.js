@@ -14,12 +14,12 @@ import router from './router'
 Vue.use(UUID)
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
-console.log(store)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  store,
+  store, 
   // 如果组件export的时候声明了name,name可以这样直接注册组件，不需要components:{name:{tempalte: component}}
   components: { App },
   // 会用名字为App的组件替换掉index.html中id为app的元素

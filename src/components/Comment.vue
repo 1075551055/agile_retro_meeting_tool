@@ -25,16 +25,16 @@
     <!-- content -->
     <b-container class="content">
       <b-row>
-        <b-col class="summary-comment-col">
+        <b-col class="summary-comment-col" :data-commenttype="commentType.well">
           <!-- bind commentId and commentContent, then tranfer to child component:CommentCard -->
             <CommentCard v-show="$store.state.comment.wellComments.length != 0" v-for="(item) in $store.state.comment.wellComments" :key="item.id" 
             v-bind:commentId="item.id" v-bind:commentContent="item.content"></CommentCard>
         </b-col>
-        <b-col class="summary-comment-col">
+        <b-col class="summary-comment-col" :data-commenttype="commentType.notWell">
            <CommentCard v-show="$store.state.comment.notWellComments.length != 0" v-for="(item) in $store.state.comment.notWellComments" :key="item.id" 
             v-bind:commentId="item.id" v-bind:commentContent="item.content"></CommentCard>
         </b-col>
-        <b-col class="summary-comment-col">
+        <b-col class="summary-comment-col" :data-commenttype="commentType.suggestion">
            <CommentCard v-show="$store.state.comment.suggestionComments.length != 0" v-for="(item) in $store.state.comment.suggestionComments" :key="item.id" 
             v-bind:commentId="item.id" v-bind:commentContent="item.content"></CommentCard>
         </b-col>
@@ -108,12 +108,12 @@ export default {
         let self = this;
         el.ondragstart = function(e) {
           // drag start
-          e.dataTransfer.setData(
-            "text/html",
-            JSON.stringify({
-              commentType: e.target.dataset.commenttype
-            })
-          );
+          // e.dataTransfer.setData(
+          //   "text/html",
+          //   JSON.stringify({
+          //     commentType: e.target.dataset.commenttype
+          //   })
+          // );
         };
         el.ondragend = function(e) {
           // after mouseup will trigger dragend
@@ -135,12 +135,11 @@ export default {
           e.preventDefault();
         };
         el.ondrop = function(e) {
-          let commentJson = JSON.parse(
-            e.dataTransfer.getData("text/html")
-          );
-          let payload = {};
-          let commentType = commentJson.commentType;
-          payload.commentType = commentType;
+          // let commentJson = JSON.parse(
+          //   e.dataTransfer.getData("text/html")
+          // );
+          let commentType = e.target.dataset.commenttype;
+          let payload = { commentType };
           if (commentType === self.commentType.well) {
              payload.commentContent = self.comment.wellComment;
           }
