@@ -8,5 +8,9 @@ export default {
         well: "well",
         notWell: "notWell",
         suggestion: 'suggestion'
+    },
+    draggedAreaType:{
+        fromInput: "fromInput",
+        fromCard: "fromCard"
     }
 }

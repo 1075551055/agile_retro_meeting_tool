@@ -27,47 +27,53 @@
       <b-row>
         <b-col class="summary-comment-col" :data-commenttype="commentType.well">
           <!-- bind commentId and commentContent, then tranfer to child component:CommentCard -->
-            <CommentCard v-show="$store.state.comment.wellComments.length != 0" v-for="(item) in $store.state.comment.wellComments" :key="item.id" 
-            v-bind:commentId="item.id" v-bind:commentContent="item.content"></CommentCard>
+            <CommentCard v-show="wellComments.length != 0" v-for="(item) in wellComments" :key="item.id" 
+            v-bind:commentId="item.id" v-bind:commentContent="item.content" v-bind:commentType="commentType.well"></CommentCard>
         </b-col>
         <b-col class="summary-comment-col" :data-commenttype="commentType.notWell">
-           <CommentCard v-show="$store.state.comment.notWellComments.length != 0" v-for="(item) in $store.state.comment.notWellComments" :key="item.id" 
-            v-bind:commentId="item.id" v-bind:commentContent="item.content"></CommentCard>
+           <CommentCard v-show="notWellComments.length != 0" v-for="(item) in notWellComments" :key="item.id" 
+            v-bind:commentId="item.id" v-bind:commentContent="item.content" v-bind:commentType="commentType.notWell"></CommentCard>
         </b-col>
         <b-col class="summary-comment-col" :data-commenttype="commentType.suggestion">
-           <CommentCard v-show="$store.state.comment.suggestionComments.length != 0" v-for="(item) in $store.state.comment.suggestionComments" :key="item.id" 
-            v-bind:commentId="item.id" v-bind:commentContent="item.content"></CommentCard>
+           <CommentCard v-show="suggestionComments.length != 0" v-for="(item) in suggestionComments" :key="item.id" 
+            v-bind:commentId="item.id" v-bind:commentContent="item.content" v-bind:commentType="commentType.suggestion"></CommentCard>
         </b-col>
       </b-row>
       <b-row>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
             <a href class="iconfont icon-jiahao"></a>
-            <div
-              contenteditable="true"
-              draggable="true"
-              :data-commenttype="commentType.well" @input="changeCommentData($event, commentType.well)"
-            >{{comment.wellComment}}</div>
+             <b-form-textarea
+                     draggable="true"
+                     v-model="comment.wellComment"
+                     placeholder="Enter something"
+                     :rows="2"
+                     :max-rows="6" :data-commenttype="commentType.well" :data-dragged-area-type="draggedAreaType.fromInput">
+            </b-form-textarea>
           </div>
         </b-col>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
             <a href class="iconfont icon-jiahao"></a>
-            <div
-              contenteditable="true"
-              draggable="true"
-              :data-commenttype="commentType.notWell" @input="changeCommentData($event, commentType.notWell)"
-            ></div>
+            <b-form-textarea
+                     draggable="true"
+                     v-model="comment.notWellComment"
+                     placeholder="Enter something"
+                     :rows="2"
+                     :max-rows="6" :data-commenttype="commentType.notWell" :data-dragged-area-type="draggedAreaType.fromInput">
+            </b-form-textarea>
           </div>
         </b-col>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
             <a href class="iconfont icon-jiahao"></a>
-            <div
-              contenteditable="true"
-              draggable="true"
-              :data-commenttype="commentType.suggestion" @input="changeCommentData($event, commentType.suggestion)"
-            ></div>
+             <b-form-textarea
+                     draggable="true"
+                     v-model="comment.suggestionComment"
+                     placeholder="Enter something"
+                     :rows="2"
+                     :max-rows="6" :data-commenttype="commentType.suggestion" :data-dragged-area-type="draggedAreaType.fromInput">
+            </b-form-textarea>
           </div>
         </b-col>
       </b-row>
@@ -83,27 +89,38 @@ export default {
   data: function() {
     return {
       comment: constants.comment,
-      commentType: constants.commentType
+      commentType: constants.commentType,
+      draggedAreaType: constants.draggedAreaType
     };
   },
   components:{
     CommentCard
   },
-  methods: {
-    changeCommentData: function(event, commentType) {
-      // this.msg = event.target.innerText;
-      if(commentType === this.commentType.well){
-          this.comment.wellComment = event.target.innerText;
-      }
-      if(commentType === this.commentType.notWell){
-          this.comment.notWellComment = event.target.innerText;
-      }
-       if(commentType === this.commentType.suggestion){
-          this.comment.suggestionComment = event.target.innerText;
-      }
+  filters:{
+    wellComments(allComments){
+      return allComments.filter(item => item.commentType === constants.commentType.well);
     },
+    notWellComments(allComments){
+      return allComments.filter(item => item.commentType === constants.commentType.notWell);
+    },
+    suggestionComments(allComments){
+      return allComments.filter(item => item.commentType === constants.commentType.suggestion);
+    }
+  },
+  computed:{
+    wellComments(){
+      return this.$store.state.comment.allComments.filter(item => item.commentType === constants.commentType.well);
+    },
+    notWellComments(){
+      return this.$store.state.comment.allComments.filter(item => item.commentType === constants.commentType.notWell);
+    },
+    suggestionComments(){
+      return this.$store.state.comment.allComments.filter(item => item.commentType === constants.commentType.suggestion);
+    }
+  },
+  methods: {
     setDragDrop: function() {
-      let fakeTextAreas = document.querySelectorAll(".fake-textarea > div");
+      let fakeTextAreas = document.querySelectorAll(".fake-textarea > textarea");
       [].forEach.call(fakeTextAreas, el => {
         let self = this;
         el.ondragstart = function(e) {
@@ -111,7 +128,8 @@ export default {
           e.dataTransfer.setData(
             "text/html",
             JSON.stringify({
-              commentType: e.target.dataset.commenttype
+              commentType: e.target.dataset.commenttype,
+              draggedAreaType: e.target.dataset.draggedAreaType
             })
           );
         };
@@ -139,24 +157,35 @@ export default {
             e.dataTransfer.getData("text/html")
           );
           let fakeCommentTextareaType = fakeCommentTextareaTypeJson.commentType;
+          let draggedAreaType = fakeCommentTextareaTypeJson.draggedAreaType;
+          let commentId = fakeCommentTextareaTypeJson.commentId;
           let droppedAreaType = e.target.dataset.commenttype;
           let payload = { commentType: droppedAreaType };
-          if (fakeCommentTextareaType === self.commentType.well) {
+          if(draggedAreaType === self.draggedAreaType.fromInput){
+            if (fakeCommentTextareaType === self.commentType.well) {
              payload.commentContent = self.comment.wellComment;
-             // clear fake comment textarea data
-             self.comment.wellComment = '';
+              //clear data
+              self.comment.wellComment = "";
+            }
+            if (fakeCommentTextareaType === self.commentType.notWell) {
+              payload.commentContent = self.comment.notWellComment;
+              //clear data
+              self.comment.notWellComment = "";
+            }
+            if (fakeCommentTextareaType === self.commentType.suggestion) {
+              payload.commentContent = self.comment.suggestionComment;
+              //clear data
+              self.comment.suggestionComment = "";
+            }
+            self.$store.dispatch('comment/addComment', payload);
+          }else if(draggedAreaType === self.draggedAreaType.fromCard){
+             let commentObj = self.$store.state.comment.allComments.filter(item => item.id === commentId)[0];
+             if(droppedAreaType !== commentObj.commentType){
+               self.$store.dispatch('comment/changeCommentType', {commentId, toCommentType:droppedAreaType})
+             }
           }
-          if (fakeCommentTextareaType === self.commentType.notWell) {
-             payload.commentContent = self.comment.notWellComment;
-             // clear fake comment textarea data
-             self.comment.notWellComment = '';
-          }
-          if (fakeCommentTextareaType === self.commentType.suggestion) {
-             payload.commentContent = self.comment.suggestionComment;
-             // clear fake comment textarea data
-             self.comment.suggestionComment = '';
-          }
-          self.$store.dispatch('comment/addComment', payload);
+          
+          // self.$store.dispatch('comment/addComment', payload);
 
         };
         
@@ -229,55 +258,6 @@ export default {
       // padding-right: 0;
       position: relative;
       overflow: auto;
-      .bottom {
-        position: absolute;
-        bottom: 0;
-        // css3 calc, gutter's padding is 15px
-        // width: calc(100% - 15px);
-        // width: -webkit-calc(100% - 15px);
-        // width: -moz-calc(100% - 15px);
-        // 100% is parent posistioned element content width + padding
-        width: 100%;
-        border-top: 1px dashed #ccc;
-        border-right: 1px dashed #ccc;
-        padding: 6px;
-        margin-left: -15px;
-        .fake-textarea {
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
-          // -webkit-user-modify: read-write-plaintext-only;
-          // min-height: 60px;
-          // max-height: 120px;
-          // overflow: auto;
-          // outline: none;
-          position: relative;
-          > div {
-            display: inline-block;
-            min-height: 60px;
-            max-height: 120px;
-            width: 100%;
-            height: 100%;
-            width: calc(100% - 45px);
-            width: -webkit-calc(100% - 45px);
-            width: -moz-calc(100% - 45px);
-            margin-left: 45px;
-            overflow: auto;
-            outline: none;
-            border: 1px solid red;
-          }
-          > a {
-            display: inline;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            padding-left: 8px;
-            font-size: 30px;
-            color: #aaa;
-            text-decoration: none;
-          }
-        }
-      }
     }
     .comment-col {
       border-right: 1px dashed #ccc;
@@ -290,7 +270,7 @@ export default {
         margin-bottom: 25px;
         position: relative;
         max-width: 100%;
-        > div {
+        > textarea {
           display: inline-block;
           min-height: 60px;
           max-height: 120px;
@@ -302,7 +282,11 @@ export default {
           margin-left: 45px;
           overflow: auto;
           outline: none;
-          // border: 1px solid red;
+          // new code
+          border-radius: 5px;
+          resize: none;
+          border: 0;
+          margin-top: 8px;
         }
         > a {
           display: inline;
