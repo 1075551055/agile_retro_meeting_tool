@@ -2,16 +2,26 @@
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
     <!-- <router-view/> -->
-    <!-- <router-view name="header"></router-view>
-    <router-view name="main"></router-view> -->
-    <router-view></router-view>
+
+    <Main></Main>
+
+    <!-- naming router layout -->
+    <!-- <router-view name="headernav"></router-view>
+    <router-view name="comment"></router-view> -->
+
+    <!-- HeaderTab layout config -->
+    <!-- <router-view></router-view> -->
   </div>
 </template>
 
 <script>
+import Main from '@/components/Main'
 export default {
   // https://cn.vuejs.org/v2/api/#name
-  name: 'App'
+  name: 'App',
+  components:{
+    Main
+  }
 }
 </script>
 
@@ -26,5 +36,11 @@ export default {
   /* background-color: #F8F4F3; */
   background-color: #f5f5f5;
   height: 100%;
+}
+
+.active-route{
+  /* background-color: red; */
+  /* border-bottom: 1px solid #fff; */
+  font-weight: 900;
 }
 </style>

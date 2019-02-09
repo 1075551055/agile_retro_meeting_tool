@@ -1,11 +1,18 @@
 <template>
   <b-container>
-      test
+      <HeaderNav></HeaderNav>
+      <router-view></router-view>
   </b-container>
 </template>
 
 <script>
-export default {};
+import HeaderNav from './HeaderNav';
+export default {
+
+    components:{
+      HeaderNav
+    }
+};
 </script>
 
 <style lang="less" scoped>

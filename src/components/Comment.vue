@@ -2,7 +2,7 @@
   <b-container fluid>
     <!-- header -->
     <b-container class="header">
-      <b-navbar toggleable="md" type="dark" variant="info">
+      <!-- <b-navbar toggleable="md" type="dark" variant="info">
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
         <b-navbar-brand href="#" class="d-lg-none d-md-none">Retro(Well)</b-navbar-brand>
@@ -20,7 +20,12 @@
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
-      </b-navbar>
+      </b-navbar> -->
+      <b-row>
+        <b-col><i class="iconfont icon-biaoqing1"></i> Well</b-col>
+        <b-col><i class="iconfont icon-biaoqing-nanguo"></i>Not Well</b-col>
+        <b-col><i class="iconfont icon-jianyi"></i>Suggestions</b-col>
+      </b-row>
     </b-container>
     <!-- content -->
     <b-container class="content">
@@ -203,6 +208,15 @@ export default {
 
 <style lang="less" scoped>
 .header {
+  .row{
+    margin-left: 0;
+    margin-right: 0;
+    .col{
+      text-align: center;
+      border-right: 1px dashed #ccc;
+      padding: 10px 0 10px;
+    }
+  }
   &.container {
     width: 100%;
     // override bootstrap "container" class max-width
@@ -213,32 +227,32 @@ export default {
       padding: 0;
     }
   }
-  // well , not well, suggestions header
-  .comment {
-    &.navbar-nav {
-      width: 100%;
-    }
-    .nav-item {
-      width: 33.333333%;
-      text-align: center;
-    }
-    @media screen and(max-width: 768px) {
-      .nav-item {
-        text-align: left;
-        margin-left: 15px;
-      }
-    }
-  }
-  .bg-info {
-    background-color: #43a047 !important;
-  }
-  .navbar-dark {
-    .navbar-nav {
-      .nav-link {
-        color: #fff;
-      }
-    }
-  }
+  // // well , not well, suggestions header
+  // .comment {
+  //   &.navbar-nav {
+  //     width: 100%;
+  //   }
+  //   .nav-item {
+  //     width: 33.333333%;
+  //     text-align: center;
+  //   }
+  //   @media screen and(max-width: 768px) {
+  //     .nav-item {
+  //       text-align: left;
+  //       margin-left: 15px;
+  //     }
+  //   }
+  // }
+  // .bg-info {
+  //   background-color: #43a047 !important;
+  // }
+  // .navbar-dark {
+  //   .navbar-nav {
+  //     .nav-link {
+  //       color: #fff;
+  //     }
+  //   }
+  // }
 }
 
 .content {
