@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid>
+  <b-container class="comment">
     <!-- header -->
     <b-container class="header">
       <!-- <b-navbar toggleable="md" type="dark" variant="info">
@@ -207,26 +207,46 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.header {
-  .row{
-    margin-left: 0;
-    margin-right: 0;
-    .col{
-      text-align: center;
-      border-right: 1px dashed #ccc;
-      padding: 10px 0 10px;
-    }
+
+.comment {
+  &.container{
+     width: 100%;
+     padding: 0;
+     @media screen and (max-width: 768px) {
+       overflow: hidden;
+     }
   }
+}
+
+.header {
   &.container {
     width: 100%;
-    // override bootstrap "container" class max-width
-    max-width: 100%;
+    // override bootstrap "container" class max-width. 300 is for mobile
+    max-width: 300%;
     padding-left: 0;
     padding-right: 0;
+    @media screen and (max-width: 768px) {
+      width: 300%;
+    }
     > nav {
       padding: 0;
     }
+    .row{
+      margin-left: 0;
+      margin-right: 0;
+      .col{
+        text-align: center;
+        border-right: 1px dashed #ccc;
+        @media screen and (max-width: 768px) {
+          border-right: none;
+        }
+        padding: 10px 0 10px;
+      
+      }
+    }
   }
+
+
   // // well , not well, suggestions header
   // .comment {
   //   &.navbar-nav {
@@ -256,16 +276,25 @@ export default {
 }
 
 .content {
-  width: 100%;
-  max-width: 100%;
-  padding-left: 0;
-  padding-right: 0;
+  &.container{
+    width: 100%;
+    // override bootstrap "container" class max-width. 300 is for mobile
+    max-width: 300%;
+    padding-left: 0;
+    padding-right: 0;
+    @media screen and (max-width: 768px) {
+      width: 300%;
+    }
+  }
   .row {
     margin-left: 0;
     margin-right: 0;
     border-bottom: 1px dashed #ccc;
     .summary-comment-col {
       border-right: 1px dashed #ccc;
+      @media screen and (max-width: 768px) {
+        border-right: none;
+      }
       height: 490px;
       //remove gutter's padding:15px
       // padding-left: 0;
@@ -275,6 +304,9 @@ export default {
     }
     .comment-col {
       border-right: 1px dashed #ccc;
+      @media screen and (max-width: 768px) {
+        border-right: none;
+      }
       max-width: 33.3333333333333%;
       .fake-textarea {
         border: 1px solid #ccc;

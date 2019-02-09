@@ -1,6 +1,6 @@
 <template>
      <!-- header -->
-    <b-container fluid class="header">
+    <b-container class="header">
       <b-navbar toggleable="md" type="dark" variant="info">
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
