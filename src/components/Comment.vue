@@ -1,4 +1,5 @@
 <template>
+<!-- <v-touch v-on:swipeleft="onSwipeLeft" v-on:swiperight="onSwipeRight"  tag="div"> -->
   <b-container class="comment">
     <!-- header -->
     <b-container class="header">
@@ -47,7 +48,7 @@
       <b-row>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
-            <a href class="iconfont icon-jiahao"></a>
+            <a href class="iconfont icon-jiahao" @click.prevent="addComment('well')"></a>
              <b-form-textarea
                      draggable="true"
                      v-model="comment.wellComment"
@@ -59,7 +60,7 @@
         </b-col>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
-            <a href class="iconfont icon-jiahao"></a>
+            <a href class="iconfont icon-jiahao" @click.prevent="addComment('notWell')"></a>
             <b-form-textarea
                      draggable="true"
                      v-model="comment.notWellComment"
@@ -71,7 +72,7 @@
         </b-col>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
-            <a href class="iconfont icon-jiahao"></a>
+            <a href class="iconfont icon-jiahao" @click.prevent="addComment('suggestion')"></a>
              <b-form-textarea
                      draggable="true"
                      v-model="comment.suggestionComment"
@@ -84,6 +85,7 @@
       </b-row>
     </b-container>
   </b-container>
+<!-- </v-touch> -->
 </template>
 
 <script>
@@ -124,6 +126,33 @@ export default {
     }
   },
   methods: {
+    addComment: function(commentType){
+      let payload = { commentType };
+            if (commentType === this.commentType.well) {
+             payload.commentContent = this.comment.wellComment;
+              //clear data
+              this.comment.wellComment = "";
+            }
+            if (commentType === this.commentType.notWell) {
+              payload.commentContent = this.comment.notWellComment;
+              //clear data
+              this.comment.notWellComment = "";
+            }
+            if (commentType === this.commentType.suggestion) {
+              payload.commentContent = this.comment.suggestionComment;
+              //clear data
+              this.comment.suggestionComment = "";
+            }
+            this.$store.dispatch('comment/addComment', payload);
+    },
+    onSwipeLeft: function(e){
+      // alert("left");
+      console.log(e)
+    },
+    onSwipeRight: function(e){
+      // alert("right")
+       console.log(e)
+    },
     setDragDrop: function() {
       let fakeTextAreas = document.querySelectorAll(".fake-textarea > textarea");
       [].forEach.call(fakeTextAreas, el => {
