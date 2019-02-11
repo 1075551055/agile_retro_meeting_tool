@@ -326,31 +326,36 @@ export default {
             box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.6);
             margin-top: 15px;
             margin-bottom: 25px;
-            position: relative;
+            // position: relative;
             max-width: 100%;
+            // content vertical center & horizontal Center
+            display: -webkit-flex;
+            display: flex;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-justify-content: center;
+            justify-content: center;
             > textarea {
-              display: inline-block;
-              min-height: 60px;
-              max-height: 120px;
-              height: 100%;
-              width: calc(100% - 45px);
-              width: -webkit-calc(100% - 45px);
-              width: -moz-calc(100% - 45px);
-              max-width: calc(100% - 45px);
-              margin-left: 45px;
+              display: block;
+              max-height: 220px;
+              width: calc(100% - 60px);
+              width: -webkit-calc(100% - 60px);
+              width: -moz-calc(100% - 60px);
+              max-width: calc(100% - 60px);
+              margin-left: 15px;
               overflow: auto;
               outline: none;
               border-radius: 5px;
               resize: none;
               border: 0;
-              margin-top: 8px;
+              &.form-control:focus{
+                -webkit-box-shadow: none;
+                box-shadow:none;
+              }
             }
             > a {
               display: inline;
-              position: absolute;
-              top: 50%;
-              transform: translateY(-50%);
-              padding-left: 8px;
+              padding-left: 6px;
               font-size: 30px;
               color: #aaa;
               text-decoration: none;

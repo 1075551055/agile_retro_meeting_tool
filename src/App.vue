@@ -26,6 +26,9 @@ export default {
 </script>
 
 <style>
+html{
+  font-size: 16px;
+}
 #app {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -44,6 +44,7 @@ export default {
     .navbar-nav {
       .nav-link {
         color: #fff;
+        font-size: 20px;
       }
       .nav-link:hover {
         color: #444;
