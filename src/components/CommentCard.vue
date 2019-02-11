@@ -59,7 +59,7 @@ export default {
   margin: 4px;
   .card-content {
     display: inline-block;
-    border: 1px solid pink;
+    // border: 1px solid pink;
     box-shadow: 3px 3px 3px #43a047;
     width: 100%;
     height: 100%;

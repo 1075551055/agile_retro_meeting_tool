@@ -7,20 +7,24 @@
                 <b-form-textarea
                         v-model="actionContent"
                         placeholder="Enter something"
-                        :rows="2"
                         :max-rows="6">
                 </b-form-textarea>
             </b-col>
-            <b-col cols="3">
+            <b-col cols="2">
                 <button type="button" class="btn btn-success btn-lg" @click="addAction">
                     add
                 </button>
+                <b-modal v-model="deleteModalShow" @ok="handleOkForDeleteAction">
+                        Are you sure to delete this item ? 
+                </b-modal>
             </b-col>
+            
         </b-row>
         <b-row>
             <b-col cols="1">
             </b-col>
             <b-col cols="8">
+                <p class="delete-tips">Tips: double click to delete item.</p>
                 <transition-group appear tag="ul">
                     <li v-for="(item, index) in allActions" :key="item.actionId" @dblclick="deleteAction(index)">{{item.actionContent}}</li>
                 </transition-group>
@@ -35,7 +39,9 @@
 export default {
     data(){
         return {
-            actionContent:''
+            actionContent:'',
+            deleteModalShow: false,
+            deletedActionIndex: ""
         }
     },
     computed:{
@@ -45,10 +51,15 @@ export default {
     },
     methods:{
         addAction(){
-            this.$store.dispatch('action/addAction', {actionContent: this.actionContent})
+            this.$store.dispatch('action/addAction', {actionContent: this.actionContent});
+            this.actionContent = "";
         },
         deleteAction(index){
-            this.$store.dispatch('action/deleteAction', {index})
+            this.deleteModalShow = true;
+            this.deletedActionIndex = index;
+        },
+        handleOkForDeleteAction(evt){
+            this.$store.dispatch('action/deleteAction', {index: this.deletedActionIndex})
         }
     }
 }
@@ -59,8 +70,16 @@ export default {
     padding: 15px;
     textarea{
         resize: none;
+        height: 100%;
     }
-
+    // button{
+    //     // width: 100%;
+    //     height: 100%;
+    // }
+    .delete-tips {
+        margin-top: 5px;
+        color: red;
+    }
     ul{
         padding: 0;
         li {
@@ -74,7 +93,8 @@ export default {
         }
 
         li:hover {
-            background-color: hotpink;
+            background-color: #87CEEB;
+            // color: #fff;
             transition: all 0.8s ease;
             cursor: pointer;
         }

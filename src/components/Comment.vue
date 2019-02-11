@@ -204,6 +204,7 @@ export default {
           let droppedAreaType = e.target.dataset.commenttype;
           let payload = { commentType: droppedAreaType };
           if (draggedAreaType === self.draggedAreaType.fromInput) {
+            //   todo: refactor
             if (fakeCommentTextareaType === self.commentType.well) {
               payload.commentContent = self.comment.wellComment;
               //clear data
@@ -220,6 +221,7 @@ export default {
               self.comment.suggestionComment = "";
             }
             self.$store.dispatch("comment/addComment", payload);
+            // self.addComment(fakeCommentTextareaType);
           } else if (draggedAreaType === self.draggedAreaType.fromCard) {
             let commentObj = self.$store.state.comment.allComments.filter(
               item => item.id === commentId
