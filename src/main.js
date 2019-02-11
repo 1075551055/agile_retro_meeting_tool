@@ -8,16 +8,16 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import UUID from 'vue-uuid'
-import VueTouch from 'vue-touch'
+// import VueTouch from 'vue-touch'
 import App from './App'
 import router from './router'
 
 Vue.use(UUID)
 Vue.use(BootstrapVue)
-Vue.use(VueTouch, {name: 'v-touch'})
-VueTouch.config.swipe = {
-  threshold: 100 //手指左右滑动距离
-}
+// Vue.use(VueTouch, {name: 'v-touch'})
+// VueTouch.config.swipe = {
+//   threshold: 100 //手指左右滑动距离
+// }
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

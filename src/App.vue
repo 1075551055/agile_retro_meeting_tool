@@ -27,7 +27,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
@@ -35,12 +35,11 @@ export default {
   /* margin-top: 60px; */
   /* background-color: #F8F4F3; */
   background-color: #f5f5f5;
+  font-size: 16px;
   height: 100%;
 }
 
 .active-route{
-  /* background-color: red; */
-  /* border-bottom: 1px solid #fff; */
-  font-weight: 900;
+  border-bottom: 1px solid red;
 }
 </style>

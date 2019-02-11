@@ -29,25 +29,25 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.header {
+.header{
   &.container {
-    width: 100%;
-    // override bootstrap "container" class max-width
-    max-width: 100%;
     padding-left: 0;
     padding-right: 0;
-    > nav {
-      padding: 0;
-    }
   }
-  
   .bg-info {
     background-color: #43a047 !important;
   }
   .navbar-dark {
+    padding-top: 0;
+    padding-bottom: 0;
+    // height: 50px;
     .navbar-nav {
       .nav-link {
         color: #fff;
+      }
+      .nav-link:hover {
+        color: #444;
+        background-color: #76d275;
       }
     }
   }
