@@ -72,10 +72,6 @@ export default {
         resize: none;
         height: 100%;
     }
-    // button{
-    //     // width: 100%;
-    //     height: 100%;
-    // }
     .delete-tips {
         margin-top: 5px;
         color: red;
@@ -94,11 +90,26 @@ export default {
 
         li:hover {
             background-color: #87CEEB;
-            // color: #fff;
             transition: all 0.8s ease;
             cursor: pointer;
         }
     }
 }
+
+// transition
+.v-leave-to{
+    opacity: 0;
+    transform: translateY(80px);
+}
+
+.v-leave-active{
+    transition: all 0.6 ease;
+    position: absolute;
+}
+
+.v-move{
+    transition: all 0.6s ease;
+}
+
 
 </style>
