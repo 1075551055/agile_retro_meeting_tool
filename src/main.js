@@ -11,6 +11,7 @@ import UUID from 'vue-uuid'
 // import VueTouch from 'vue-touch'
 import App from './App'
 import router from './router'
+import 'vue2-animate/dist/vue2-animate.min.css'
 
 Vue.use(UUID)
 Vue.use(BootstrapVue)

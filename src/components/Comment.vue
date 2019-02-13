@@ -20,34 +20,41 @@
       <b-row>
         <b-col class="summary-comment-col" :data-commenttype="commentType.well">
           <!-- bind commentId and commentContent, then tranfer to child component:CommentCard -->
-          <CommentCard
-            v-show="wellComments.length != 0"
-            v-for="(item) in wellComments"
-            :key="item.id"
-            v-bind:commentId="item.id"
-            v-bind:commentContent="item.content"
-            v-bind:commentType="commentType.well"
-          ></CommentCard>
+          <transition-group name="fadeUp">
+            <CommentCard
+                v-show="wellComments.length != 0"
+                v-for="(item) in wellComments"
+                :key="item.id"
+                v-bind:commentId="item.id"
+                v-bind:commentContent="item.content"
+                v-bind:commentType="commentType.well"
+            ></CommentCard>
+          </transition-group>
+         
         </b-col>
         <b-col class="summary-comment-col" :data-commenttype="commentType.notWell">
-          <CommentCard
-            v-show="notWellComments.length != 0"
-            v-for="(item) in notWellComments"
-            :key="item.id"
-            v-bind:commentId="item.id"
-            v-bind:commentContent="item.content"
-            v-bind:commentType="commentType.notWell"
-          ></CommentCard>
+            <transition-group name="fadeUp">
+                <CommentCard
+                    v-show="notWellComments.length != 0"
+                    v-for="(item) in notWellComments"
+                    :key="item.id"
+                    v-bind:commentId="item.id"
+                    v-bind:commentContent="item.content"
+                    v-bind:commentType="commentType.notWell"
+                ></CommentCard>
+            </transition-group>
         </b-col>
         <b-col class="summary-comment-col" :data-commenttype="commentType.suggestion">
-          <CommentCard
-            v-show="suggestionComments.length != 0"
-            v-for="(item) in suggestionComments"
-            :key="item.id"
-            v-bind:commentId="item.id"
-            v-bind:commentContent="item.content"
-            v-bind:commentType="commentType.suggestion"
-          ></CommentCard>
+            <transition-group name="fadeUp">
+                <CommentCard
+                    v-show="suggestionComments.length != 0"
+                    v-for="(item) in suggestionComments"
+                    :key="item.id"
+                    v-bind:commentId="item.id"
+                    v-bind:commentContent="item.content"
+                    v-bind:commentType="commentType.suggestion"
+                ></CommentCard>
+            </transition-group>
         </b-col>
       </b-row>
       <b-row>
