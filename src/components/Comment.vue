@@ -139,19 +139,22 @@ export default {
     }
   },
   methods: {
-    addComment: function(commentType) {
-      let payload = { commentType };
-      if (commentType === this.commentType.well) {
+    addComment: function(commentTextareaType, droppedAreaType = null) {
+      let payload = { commentType: commentTextareaType };
+      if(droppedAreaType != null) {
+          payload.commentType = droppedAreaType;
+      }
+      if (commentTextareaType === this.commentType.well) {
         payload.commentContent = this.comment.wellComment;
         //clear data
         this.comment.wellComment = "";
       }
-      if (commentType === this.commentType.notWell) {
+      if (commentTextareaType === this.commentType.notWell) {
         payload.commentContent = this.comment.notWellComment;
         //clear data
         this.comment.notWellComment = "";
       }
-      if (commentType === this.commentType.suggestion) {
+      if (commentTextareaType === this.commentType.suggestion) {
         payload.commentContent = this.comment.suggestionComment;
         //clear data
         this.comment.suggestionComment = "";
@@ -203,33 +206,16 @@ export default {
           e.preventDefault();
         };
         el.ondrop = function(e) {
-          let fakeCommentTextareaTypeJson = JSON.parse(
+          let dragDroppedCommentJson = JSON.parse(
             e.dataTransfer.getData("text/html")
           );
-          let fakeCommentTextareaType = fakeCommentTextareaTypeJson.commentType;
-          let draggedAreaType = fakeCommentTextareaTypeJson.draggedAreaType;
-          let commentId = fakeCommentTextareaTypeJson.commentId;
+          let commentTextareaType = dragDroppedCommentJson.commentType;
+          let draggedAreaType = dragDroppedCommentJson.draggedAreaType;
+          let commentId = dragDroppedCommentJson.commentId;
           let droppedAreaType = e.target.dataset.commenttype;
           let payload = { commentType: droppedAreaType };
           if (draggedAreaType === self.draggedAreaType.fromInput) {
-            //   todo: refactor
-            if (fakeCommentTextareaType === self.commentType.well) {
-              payload.commentContent = self.comment.wellComment;
-              //clear data
-              self.comment.wellComment = "";
-            }
-            if (fakeCommentTextareaType === self.commentType.notWell) {
-              payload.commentContent = self.comment.notWellComment;
-              //clear data
-              self.comment.notWellComment = "";
-            }
-            if (fakeCommentTextareaType === self.commentType.suggestion) {
-              payload.commentContent = self.comment.suggestionComment;
-              //clear data
-              self.comment.suggestionComment = "";
-            }
-            self.$store.dispatch("comment/addComment", payload);
-            // self.addComment(fakeCommentTextareaType);
+            self.addComment(commentTextareaType, droppedAreaType);
           } else if (draggedAreaType === self.draggedAreaType.fromCard) {
             let commentObj = self.$store.state.comment.allComments.filter(
               item => item.id === commentId
