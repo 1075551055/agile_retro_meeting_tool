@@ -160,7 +160,8 @@ export default {
       console.log(e);
     },
     setDragDrop: function() {
-      let fakeTextAreas = document.querySelectorAll(
+        // $el 获取根元素
+      let fakeTextAreas = this.$el.querySelectorAll(
         ".fake-textarea > textarea"
       );
       [].forEach.call(fakeTextAreas, el => {
@@ -186,7 +187,7 @@ export default {
         };
       });
 
-      let commentCols = document.querySelectorAll(".summary-comment-col");
+      let commentCols = this.$el.querySelectorAll(".summary-comment-col");
       Array.prototype.forEach.call(commentCols, el => {
         let self = this;
         el.ondragenter = function(e) {};

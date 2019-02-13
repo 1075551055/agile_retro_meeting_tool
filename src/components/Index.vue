@@ -5,7 +5,11 @@
         <div class="retro-des">
           <h1>Agile Retrospective Meeting</h1>
           <br>
-          <b-button variant="secondary btn-lg">start a meeting</b-button>
+          <b-button variant="secondary btn-lg" @click="createMeeting">start a meeting</b-button>
+          <loading
+            :show="isLoading"
+            :label="loadingLabel">
+        </loading>
         </div>
       </b-row>
       <b-row>
@@ -18,7 +22,31 @@
 </template>
 
 <script>
-export default {};
+import loading from 'vue-full-loading'
+export default {
+  data() {
+    return {
+        isLoading: false,
+        loadingLabel: "loading..."
+    };
+  },
+  components: {
+    loading
+  },
+  methods: {
+    createMeeting() {
+      // ajax create meeting
+      this.isLoading = true;
+      setTimeout(() => {
+        this.isLoading = false;
+        let meetingId = "123";
+        this.$router.push({ path: `${meetingId}/comment` });
+      },3000)
+      
+    }
+  }
+
+};
 </script>
 
 <style lang="less" scoped>
@@ -56,6 +84,7 @@ export default {};
     width: 100%;
     height: 100%;
     img {
+      // todo: adapt pc & mobile
       width: 100%;
     }
   }
