@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
-import HeaderTab from '@/components/HeaderTab'
 import Action from '@/components/Action'
 import Comment from '@/components/Comment'
-import HeaderNav from '@/components/HeaderNav'
+import Index from '@/components/Index'
+import Main from '@/components/Main'
 
 Vue.use(Router)
 
@@ -37,16 +37,37 @@ export default new Router({
     //   }
     // }
 
+    // {
+    //   path: '/',
+    //   redirect: '/comment'
+    // },
+    // {
+    //   path: '/comment',
+    //   component: Comment
+    // },{
+    //   path: '/action',
+    //   component: Action
+    // }
+
     {
       path: '/',
-      redirect: '/comment'
+      component: Index
     },{
-      path: '/comment',
-      component: Comment
-    },{
-      path: '/action',
-      component: Action
+      path: '/:meetingId',
+      component: Main,
+      children:[{
+        path:'',
+        component: Comment
+      },{
+        path: 'comment',
+        component: Comment
+      },{
+        path: 'action',
+        component: Action
+      }]
     }
+
+    // todo: config not found view
   ],
   linkActiveClass:'active-route'
 })

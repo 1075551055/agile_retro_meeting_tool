@@ -3,8 +3,9 @@
     <!-- <img src="./assets/logo.png"> -->
     <!-- <router-view/> -->
 
-    <Main></Main>
-
+    <!-- <Main></Main> -->
+    <router-view></router-view>
+   
     <!-- naming router layout -->
     <!-- <router-view name="headernav"></router-view>
     <router-view name="comment"></router-view> -->
@@ -16,9 +17,14 @@
 
 <script>
 import Main from '@/components/Main'
+
 export default {
   // https://cn.vuejs.org/v2/api/#name
   name: 'App',
+  data(){
+    return{
+    }
+  },
   components:{
     Main
   }
@@ -33,10 +39,6 @@ html{
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  /* color: #2c3e50; */
-  /* margin-top: 60px; */
-  /* background-color: #F8F4F3; */
   background-color: #f5f5f5;
   font-size: 16px;
   height: 100%;
@@ -44,5 +46,12 @@ html{
 
 .active-route{
   border-bottom: 1px solid red;
+}
+
+/* will override children's component .container class style */
+.container {
+  width: 100%;
+  /* override bootstrap "container" class max-width */
+  max-width: 100%;
 }
 </style>

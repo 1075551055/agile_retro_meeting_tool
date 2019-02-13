@@ -22,11 +22,11 @@ export default {
     flex-direction: column;
     min-height: 100vh;
 }
-// will override children's component .container class style
-.container {
-  width: 100%;
-  // override bootstrap "container" class max-width
-  max-width: 100%;
-}
+// // will override children's component .container class style
+// .container {
+//   width: 100%;
+//   // override bootstrap "container" class max-width
+//   max-width: 100%;
+// }
 
 </style>
