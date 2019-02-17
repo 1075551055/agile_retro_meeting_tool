@@ -5,7 +5,7 @@
   "author": "Water Li",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 146.222.81.139",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
@@ -13,7 +13,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "vue": "^2.5.2",
+    "vue-axios": "^2.1.4",
     "vue-full-loading": "^1.2.1",
     "vue-router": "^3.0.1",
     "vue-touch": "^1.1.0",

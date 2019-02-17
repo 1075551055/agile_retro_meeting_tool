@@ -6,10 +6,7 @@
           <h1>Agile Retrospective Meeting</h1>
           <br>
           <b-button variant="secondary btn-lg" @click="createMeeting">start a meeting</b-button>
-          <loading
-            :show="isLoading"
-            :label="loadingLabel">
-        </loading>
+          <loading :show="isLoading" :label="loadingLabel"></loading>
         </div>
       </b-row>
       <b-row>
@@ -22,12 +19,13 @@
 </template>
 
 <script>
-import loading from 'vue-full-loading'
+import loading from "vue-full-loading";
+import { uuid } from "vue-uuid";
 export default {
   data() {
     return {
-        isLoading: false,
-        loadingLabel: "loading..."
+      isLoading: false,
+      loadingLabel: "loading..."
     };
   },
   components: {
@@ -35,17 +33,25 @@ export default {
   },
   methods: {
     createMeeting() {
-      // ajax create meeting
       this.isLoading = true;
+      // ajax create meeting
+      let _this = this;
       setTimeout(() => {
-        this.isLoading = false;
-        let meetingId = "123";
-        this.$router.push({ path: `${meetingId}/comment` });
-      },3000)
-      
+          this.axios.post('/meeting',{meetingName: 'agile retro meeting'})
+                .then(function(response){
+                    let status = response.data.status;
+                    if(status == 0){
+                        _this.isLoading = false;
+                        let meetingId = response.data.meetingId;
+                        _this.$router.push({ path: `${meetingId}/comment` });
+                    }
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+      }, 2000);
     }
   }
-
 };
 </script>
 

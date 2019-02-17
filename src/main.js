@@ -12,9 +12,15 @@ import UUID from 'vue-uuid'
 import App from './App'
 import router from './router'
 import 'vue2-animate/dist/vue2-animate.min.css'
+// import VueResource from 'vue-resource'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.use(UUID)
 Vue.use(BootstrapVue)
+Vue.use(VueAxios, axios)
+axios.defaults.baseURL = 'api'
+// Vue.use(VueResource)
 // Vue.use(VueTouch, {name: 'v-touch'})
 // VueTouch.config.swipe = {
 //   threshold: 100 //手指左右滑动距离
