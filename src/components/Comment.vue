@@ -24,8 +24,8 @@
             <CommentCard
                 v-show="wellComments.length != 0"
                 v-for="(item) in wellComments"
-                :key="item.id"
-                v-bind:commentId="item.id"
+                :key="item.commentId"
+                v-bind:commentId="item.commentId"
                 v-bind:commentContent="item.content"
                 v-bind:commentType="commentType.well"
             ></CommentCard>
@@ -37,8 +37,8 @@
                 <CommentCard
                     v-show="notWellComments.length != 0"
                     v-for="(item) in notWellComments"
-                    :key="item.id"
-                    v-bind:commentId="item.id"
+                    :key="item.commentId"
+                    v-bind:commentId="item.commentId"
                     v-bind:commentContent="item.content"
                     v-bind:commentType="commentType.notWell"
                 ></CommentCard>
@@ -49,8 +49,8 @@
                 <CommentCard
                     v-show="suggestionComments.length != 0"
                     v-for="(item) in suggestionComments"
-                    :key="item.id"
-                    v-bind:commentId="item.id"
+                    :key="item.commentId"
+                    v-bind:commentId="item.commentId"
                     v-bind:commentContent="item.content"
                     v-bind:commentType="commentType.suggestion"
                 ></CommentCard>
@@ -140,7 +140,7 @@ export default {
   },
   methods: {
     addComment: function(commentTextareaType, droppedAreaType = null) {
-      let payload = { commentType: commentTextareaType };
+      let payload = { commentType: commentTextareaType, meetingId: this.$route.params.meetingId };
       if(droppedAreaType != null) {
           payload.commentType = droppedAreaType;
       }
@@ -218,7 +218,7 @@ export default {
             self.addComment(commentTextareaType, droppedAreaType);
           } else if (draggedAreaType === self.draggedAreaType.fromCard) {
             let commentObj = self.$store.state.comment.allComments.filter(
-              item => item.id === commentId
+              item => item.commentId === commentId
             )[0];
             if (droppedAreaType !== commentObj.commentType) {
               self.$store.dispatch("comment/changeCommentType", {
