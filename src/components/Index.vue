@@ -43,13 +43,13 @@ export default {
                     if(status == 0){
                         _this.isLoading = false;
                         let meetingId = response.data.meetingId;
-                        _this.$router.push({ path: `${meetingId}/comment` });
+                        _this.$router.push({ path: `main/comment/${meetingId}` });
                     }
                 })
                 .catch(function(error){
                     console.log(error)
                 })
-      }, 2000);
+      }, 1000);
     }
   }
 };

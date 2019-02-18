@@ -5,6 +5,7 @@ import Action from '@/components/Action'
 import Comment from '@/components/Comment'
 import Index from '@/components/Index'
 import Main from '@/components/Main'
+import axiosUtil from '@/axios'
 
 Vue.use(Router)
 
@@ -52,22 +53,38 @@ export default new Router({
     {
       path: '/',
       component: Index
-    },{
-      path: '/:meetingId',
+    }, {
+      path: '/main',
       component: Main,
-      children:[{
-        path:'',
+      children: [{
+        path: '',
         component: Comment
-      },{
-        path: 'comment',
+      }, {
+        path: 'comment/:meetingId',
+        name: 'comment',
         component: Comment
-      },{
-        path: 'action',
+      }, {
+        path: 'action/:meetingId',
+        name: 'action',
         component: Action
-      }]
+      }],
+      // todo: when change comment & action need to detect
+      beforeEnter: (to, from, next) => {
+        axiosUtil(this.a.app).validateMeetingId(to.params.meetingId).then(response => {
+          if (response.data.existing == -1) {
+            next({ name: '404' })
+          } 
+          next()
+        })
+      }
+    }, {
+      path: '/404',
+      name: '404',
+      component: () => import('@/components/404.vue')
+    }, {
+      path: '*',
+      redirect: '/404'
     }
-
-    // todo: config not found view
   ],
-  linkActiveClass:'active-route'
+  linkActiveClass: 'active-route'
 })

@@ -11,11 +11,11 @@
             <!-- <b-nav-item href="#/comment">
                Comment
             </b-nav-item> -->
-            <router-link class="nav-link" to='comment'>Comment</router-link>
+            <router-link class="nav-link" :to="{name:'comment', params:{meetingId}}">Comment</router-link>
             <!-- <b-nav-item href="#/action">
               Action
             </b-nav-item> -->
-            <router-link class="nav-link" to='action'>Action</router-link>
+            <router-link class="nav-link" :to="{name: 'action', params:{meetingId}}">Action</router-link>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -24,7 +24,11 @@
 
 <script>
 export default {
-    
+    data: function(){
+      return {
+        meetingId: this.$route.params.meetingId
+      }
+    }
 }
 </script>
 
