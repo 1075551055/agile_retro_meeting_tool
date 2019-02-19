@@ -138,6 +138,12 @@ export default {
       );
     }
   },
+  created: function(){
+      this.$store.dispatch('comment/getAllComments',{meetingId: this.$route.params.meetingId})
+  },
+  mounted: function() {
+    this.setDragDrop();
+  },
   methods: {
     addComment: function(commentTextareaType, droppedAreaType = null) {
       let payload = { commentType: commentTextareaType, meetingId: this.$route.params.meetingId };
@@ -234,9 +240,6 @@ export default {
         };
       });
     }
-  },
-  mounted: function() {
-    this.setDragDrop();
   }
 };
 </script>

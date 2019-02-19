@@ -21,6 +21,10 @@ const mutations = {
     },
     [CHANGE_COMMENT_TO_ANOTHER_COMMENTTYPE](state, {commentId, toCommentType}){
         state.allComments.filter(item => item.commentId === commentId)[0].commentType = toCommentType;
+    },
+    [SET_ALL_COMMENTS](state, allComments){
+        state.allComments = allComments;
+        // console.log(state.allComments)
     }
 }
 
@@ -37,10 +41,14 @@ const actions = {
         })
     },
     changeCommentType({commit}, {commentId, toCommentType}){
-        //ajax: update db
         this._vm.axios.put('/comment/' + commentId, {commentId, commentType: toCommentType}).then(result => {
-            console.log(result)
             commit(CHANGE_COMMENT_TO_ANOTHER_COMMENTTYPE, {commentId, toCommentType});
+        })
+    },
+    getAllComments({commit},{meetingId}){
+        this._vm.axios.get('/comment/' + meetingId).then(result => {
+            // console.log(result.data)
+            commit(SET_ALL_COMMENTS, result.data)
         })
     }
 }
