@@ -1,6 +1,20 @@
 <template>
     <b-container>
         <b-row>
+            <b-col cols="1"></b-col>
+             <b-col cols="9">
+                 <b-input-group class="mb-3" size="lg" prepend="">
+                    <b-form-input v-model="actionContent" placeholder="Enter something"/>
+                    <b-input-group-append>
+                        <b-btn size="lg" text="Button" variant="success" @click="addAction">add</b-btn>
+                    </b-input-group-append>
+                </b-input-group>
+             </b-col>
+             <b-modal v-model="deleteModalShow" @ok="handleOkForDeleteAction">
+                        Are you sure to delete this item ? 
+             </b-modal>
+        </b-row>
+        <!-- <b-row>
             <b-col cols="1">
             </b-col>
             <b-col cols="8">
@@ -19,14 +33,17 @@
                 </b-modal>
             </b-col>
             
-        </b-row>
+        </b-row> -->
         <b-row>
             <b-col cols="1">
             </b-col>
-            <b-col cols="8">
+            <b-col cols="9">
                 <p class="delete-tips">Tips: double click to delete item.</p>
                 <transition-group appear tag="ul">
-                    <li v-for="(item, index) in allActions" :key="item.actionId" @dblclick="deleteAction(index, item.actionId)">{{item.actionContent}}</li>
+                    <li v-for="(item, index) in allActions" :key="item.actionId" @dblclick="deleteAction(index, item.actionId)">
+                        {{item.actionContent}}
+
+                    </li>
                 </transition-group>
             </b-col>
             <b-col cols="3">
@@ -91,6 +108,8 @@ export default {
             padding-left: 5px;
             font-size: 12px;
             width: 100%;
+            word-break : break-all; 
+            // word-wrap: break-word;
         }
 
         li:hover {

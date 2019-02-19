@@ -15,9 +15,11 @@ import 'vue2-animate/dist/vue2-animate.min.css'
 // import VueResource from 'vue-resource'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueClipboard from 'vue-clipboard2'
 
 Vue.use(UUID)
 Vue.use(BootstrapVue)
+Vue.use(VueClipboard)
 Vue.use(VueAxios, axios)
 axios.defaults.baseURL = 'api'
 // Vue.use(VueResource)

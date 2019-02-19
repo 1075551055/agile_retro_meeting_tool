@@ -18,19 +18,28 @@
     ></b-form-textarea>
     <div class="operations">
       <a href="" class="iconfont icon-jiufuqianbaoicon05" @click.prevent="deleteComment(commentId)">delete</a>
-      <a href="" class="iconfont icon-fuzhi">copy</a>
+      <a href="" class="iconfont icon-fuzhi" @click.prevent
+       v-clipboard:copy="commentContent"
+       v-clipboard:success="onCopy"
+       v-clipboard:error="onError">copy</a>
     </div>
+    <vue-toast ref='toast'></vue-toast>
   </div>
 </template>
 
 <script>
 import constants from "@/constants";
+import 'vue-toast/dist/vue-toast.min.css'
+import VueToast from 'vue-toast'
 export default {
   name: "CommentCard",
   data: function() {
     return {};
   },
   props: ["commentId", "commentContent", "commentType"],
+  components: {
+     VueToast
+  },
   methods: {
     setDragStart: function() {
       // don't know why b-form-textarea does not have dragstart event? so use document.querySelector('.card-content').ondragstart instead
@@ -49,6 +58,20 @@ export default {
     },
     deleteComment(commentId){
         this.$store.dispatch('comment/deleteCommentByCommentId',{commentId})
+    },
+    onCopy: function(e){
+      // alert('You just copied: ' + e.text)
+      const toast = this.$refs.toast
+      toast.setOptions({
+        position: "top center"
+      })
+       toast.showToast('You just copied: ' + e.text, {
+            theme: "success",
+            timeLife : 1000
+       })
+    },
+    onError: function (e) {
+      alert('Failed to copy texts')
     }
   },
   mounted() {
@@ -68,7 +91,7 @@ export default {
   .card-content {
     display: inline-block;
     // border: 1px solid pink;
-    box-shadow: 3px 3px 3px #43a047;
+    box-shadow: 1px 2px 3px #43a047;
     width: 100%;
     height: 100%;
     max-height: 145%;
