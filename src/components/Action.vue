@@ -49,9 +49,12 @@ export default {
             return this.$store.state.action.allActions;
         }
     },
+    created(){
+        this.$store.dispatch('action/getAllActions',{meetingId: this.$route.params.meetingId})
+    },
     methods:{
         addAction(){
-            this.$store.dispatch('action/addAction', {actionContent: this.actionContent});
+            this.$store.dispatch('action/addAction', {actionContent: this.actionContent, meetingId: this.$route.params.meetingId});
             this.actionContent = "";
         },
         deleteAction(index){
