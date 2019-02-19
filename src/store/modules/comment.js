@@ -1,4 +1,4 @@
-import {SET_COMMENT, SET_ALL_COMMENTS, CHANGE_COMMENT_TO_ANOTHER_COMMENTTYPE} from '@/store/mutations.types'
+import {SET_COMMENT, SET_ALL_COMMENTS, CHANGE_COMMENT_TO_ANOTHER_COMMENTTYPE, REMOVE_COMMENT} from '@/store/mutations.types'
 import constants from '@/constants'
 import {uuid} from 'vue-uuid'
 //init state
@@ -25,6 +25,9 @@ const mutations = {
     [SET_ALL_COMMENTS](state, allComments){
         state.allComments = allComments;
         // console.log(state.allComments)
+    },
+    [REMOVE_COMMENT](state, {commentId}){
+        state.allComments = state.allComments.filter(item => item.commentId != commentId)
     }
 }
 
@@ -49,6 +52,11 @@ const actions = {
         this._vm.axios.get('/comment/' + meetingId).then(result => {
             // console.log(result.data)
             commit(SET_ALL_COMMENTS, result.data)
+        })
+    },
+    deleteCommentByCommentId({commit},{commentId}){
+        this._vm.axios.delete('/comment/' + commentId).then(result => {
+            commit(REMOVE_COMMENT, {commentId})
         })
     }
 }

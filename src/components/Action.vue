@@ -26,7 +26,7 @@
             <b-col cols="8">
                 <p class="delete-tips">Tips: double click to delete item.</p>
                 <transition-group appear tag="ul">
-                    <li v-for="(item, index) in allActions" :key="item.actionId" @dblclick="deleteAction(index)">{{item.actionContent}}</li>
+                    <li v-for="(item, index) in allActions" :key="item.actionId" @dblclick="deleteAction(index, item.actionId)">{{item.actionContent}}</li>
                 </transition-group>
             </b-col>
             <b-col cols="3">
@@ -41,7 +41,8 @@ export default {
         return {
             actionContent:'',
             deleteModalShow: false,
-            deletedActionIndex: ""
+            deletedActionIndex: "",
+            deletedActionId: ""
         }
     },
     computed:{
@@ -57,12 +58,13 @@ export default {
             this.$store.dispatch('action/addAction', {actionContent: this.actionContent, meetingId: this.$route.params.meetingId});
             this.actionContent = "";
         },
-        deleteAction(index){
+        deleteAction(index, acitonId){
             this.deleteModalShow = true;
             this.deletedActionIndex = index;
+            this.deletedActionId = acitonId;
         },
         handleOkForDeleteAction(evt){
-            this.$store.dispatch('action/deleteAction', {index: this.deletedActionIndex})
+            this.$store.dispatch('action/deleteAction', {index: this.deletedActionIndex, actionId: this.deletedActionId})
         }
     }
 }

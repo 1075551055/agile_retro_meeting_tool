@@ -6,7 +6,7 @@
       </b-card>
     </b-card-group>-->
     <!-- <div class="card-content" contenteditable="true" draggable="true"  v-on:dragstart="dragStart($event)" :id="commentId">{{commentContent}}</div> -->
-    <b-form-textarea
+    <b-form-textarea readonly
       class="card-content"
       draggable="true"
       :id="commentId"
@@ -16,6 +16,10 @@
       :rows="2"
       :max-rows="6"
     ></b-form-textarea>
+    <div class="operations">
+      <a href="" class="iconfont icon-jiufuqianbaoicon05" @click.prevent="deleteComment(commentId)">delete</a>
+      <a href="" class="iconfont icon-fuzhi">copy</a>
+    </div>
   </div>
 </template>
 
@@ -42,6 +46,9 @@ export default {
           })
         );
       };
+    },
+    deleteComment(commentId){
+        this.$store.dispatch('comment/deleteCommentByCommentId',{commentId})
     }
   },
   mounted() {
@@ -57,6 +64,7 @@ export default {
   max-height: 45%;
   display: inline-block;
   margin: 4px;
+  position: relative;
   .card-content {
     display: inline-block;
     // border: 1px solid pink;
@@ -67,6 +75,27 @@ export default {
     overflow: auto;
     outline: none;
     resize: none;
+  }
+  &:hover{
+    .operations{
+        display: block;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 2000;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+    }
+  }
+  .operations{
+    text-align: center;
+    display: none;
+    a{
+      margin-left: 5px;
+      margin-right: 5px;
+      text-decoration: none;
+      color: #fff;
+    }
   }
 }
 </style>

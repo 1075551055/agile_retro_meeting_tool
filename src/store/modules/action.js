@@ -31,8 +31,13 @@ const actions = {
             }
         })
     },
-    deleteAction({commit}, {index}){
-        commit(REMOVE_ACTION, {index})
+    deleteAction({commit}, {index, actionId}){
+        this._vm.axios.delete('/action/' + actionId).then(result => {
+            if(result.data.status === 0){
+                commit(REMOVE_ACTION, {index})
+            }
+        })
+        
     },
     getAllActions({commit},{meetingId}){
         this._vm.axios.get('/action/' + meetingId).then(result => {
