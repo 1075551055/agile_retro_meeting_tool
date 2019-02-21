@@ -34,30 +34,41 @@ const mutations = {
 // actions, business logic here
 const actions = {
     addComment({commit}, payload){
-        let commentPayload = {};
-        let commentObj = {meetingId: payload.meetingId, commentId: uuid.v1(), content: payload.commentContent, commentType: payload.commentType};
+        var commentPayload = {};
+        var commentObj = {meetingId: payload.meetingId, commentId: uuid.v1(), content: payload.commentContent, commentType: payload.commentType};
         commentPayload.commentObj = commentObj;
         this._vm.axios.post('/comment', commentObj).then(result => {
             if(result.data.status === 0){
-                commit(SET_COMMENT, commentPayload);
+                // commit(SET_COMMENT, commentPayload);
             }
         })
     },
     changeCommentType({commit}, {commentId, toCommentType}){
         this._vm.axios.put('/comment/' + commentId, {commentId, commentType: toCommentType}).then(result => {
-            commit(CHANGE_COMMENT_TO_ANOTHER_COMMENTTYPE, {commentId, toCommentType});
+            // commit(CHANGE_COMMENT_TO_ANOTHER_COMMENTTYPE, {commentId, toCommentType});
         })
     },
     getAllComments({commit},{meetingId}){
         this._vm.axios.get('/comment/' + meetingId).then(result => {
-            // console.log(result.data)
             commit(SET_ALL_COMMENTS, result.data)
         })
     },
     deleteCommentByCommentId({commit},{commentId}){
         this._vm.axios.delete('/comment/' + commentId).then(result => {
-            commit(REMOVE_COMMENT, {commentId})
+            // commit(REMOVE_COMMENT, {commentId})
         })
+    },
+    // websocket
+    // server emit event:ADDCOMMENT
+    SOCKET_ADDCOMMENT({commit}, data){
+        var commentPayload = {commentObj: data};
+        commit(SET_COMMENT, commentPayload);
+    },
+    SOCKET_DELETECOMMENT({commit}, commentId){
+        commit(REMOVE_COMMENT, {commentId})
+    },
+    SOCKET_CHANGECOMMENTTYPE({commit}, data){
+        commit(CHANGE_COMMENT_TO_ANOTHER_COMMENTTYPE, {commentId: data.commentId, toCommentType: data.commentType});
     }
 }
 

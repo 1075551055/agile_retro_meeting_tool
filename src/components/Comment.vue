@@ -144,9 +144,10 @@ export default {
   mounted: function() {
     this.setDragDrop();
   },
+
   methods: {
     addComment: function(commentTextareaType, droppedAreaType = null) {
-      let payload = { commentType: commentTextareaType, meetingId: this.$route.params.meetingId };
+      var payload = { commentType: commentTextareaType, meetingId: this.$route.params.meetingId };
       if(droppedAreaType != null) {
           payload.commentType = droppedAreaType;
       }
@@ -177,11 +178,11 @@ export default {
     },
     setDragDrop: function() {
         // $el 获取根元素
-      let fakeTextAreas = this.$el.querySelectorAll(
+      var fakeTextAreas = this.$el.querySelectorAll(
         ".fake-textarea > textarea"
       );
       [].forEach.call(fakeTextAreas, el => {
-        let self = this;
+        var self = this;
         el.ondragstart = function(e) {
           // drag start
           e.dataTransfer.setData(
@@ -203,27 +204,27 @@ export default {
         };
       });
 
-      let commentCols = this.$el.querySelectorAll(".summary-comment-col");
+      var commentCols = this.$el.querySelectorAll(".summary-comment-col");
       Array.prototype.forEach.call(commentCols, el => {
-        let self = this;
+        var self = this;
         el.ondragenter = function(e) {};
         el.ondragover = function(e) {
           // prevent browser default behaviour or it cannot trigger ondrop event
           e.preventDefault();
         };
         el.ondrop = function(e) {
-          let dragDroppedCommentJson = JSON.parse(
+          var dragDroppedCommentJson = JSON.parse(
             e.dataTransfer.getData("text/html")
           );
-          let commentTextareaType = dragDroppedCommentJson.commentType;
-          let draggedAreaType = dragDroppedCommentJson.draggedAreaType;
-          let commentId = dragDroppedCommentJson.commentId;
-          let droppedAreaType = e.target.dataset.commenttype;
-          let payload = { commentType: droppedAreaType };
+          var commentTextareaType = dragDroppedCommentJson.commentType;
+          var draggedAreaType = dragDroppedCommentJson.draggedAreaType;
+          var commentId = dragDroppedCommentJson.commentId;
+          var droppedAreaType = e.target.dataset.commenttype;
+          var payload = { commentType: droppedAreaType };
           if (draggedAreaType === self.draggedAreaType.fromInput) {
             self.addComment(commentTextareaType, droppedAreaType);
           } else if (draggedAreaType === self.draggedAreaType.fromCard) {
-            let commentObj = self.$store.state.comment.allComments.filter(
+            var commentObj = self.$store.state.comment.allComments.filter(
               item => item.commentId === commentId
             )[0];
             if (droppedAreaType !== commentObj.commentType) {
@@ -240,7 +241,8 @@ export default {
         };
       });
     }
-  }
+ 
+ }
 };
 </script>
 

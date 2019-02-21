@@ -35,14 +35,14 @@ export default {
     createMeeting() {
       this.isLoading = true;
       // ajax create meeting
-      let _this = this;
+      var _this = this;
       setTimeout(() => {
           this.axios.post('/meeting',{meetingName: 'agile retro meeting'})
                 .then(function(response){
-                    let status = response.data.status;
+                    var status = response.data.status;
                     if(status == 0){
                         _this.isLoading = false;
-                        let meetingId = response.data.meetingId;
+                        var meetingId = response.data.meetingId;
                         _this.$router.push({ path: `main/comment/${meetingId}` });
                     }
                 })

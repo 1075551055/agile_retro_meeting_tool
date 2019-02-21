@@ -19,6 +19,7 @@
     "vue-clipboard2": "^0.3.0",
     "vue-full-loading": "^1.2.1",
     "vue-router": "^3.0.1",
+    "vue-socket.io": "^3.0.5",
     "vue-toast": "^3.1.0",
     "vue-touch": "^1.1.0",
     "vue-uuid": "^1.1.1",

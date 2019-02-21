@@ -27,6 +27,18 @@ axios.defaults.baseURL = 'api'
 // VueTouch.config.swipe = {
 //   threshold: 100 //手指左右滑动距离
 // }
+import VueSocketIO from 'vue-socket.io'
+
+Vue.use(new VueSocketIO({
+    debug: process.env.NODE_ENV !== 'production',
+    connection: 'http://146.222.81.139:3000',
+    vuex: {
+        store,
+        actionPrefix: 'SOCKET_',
+        mutationPrefix: 'SOCKET_'
+    }
+}))
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

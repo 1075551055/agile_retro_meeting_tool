@@ -23,8 +23,8 @@ const mutations = {
 
 const actions = {
     addAction({commit}, {actionContent, meetingId}){
-        let actionId = uuid.v1();
-        let actionObj = {actionId, actionContent, meetingId};
+        var actionId = uuid.v1();
+        var actionObj = {actionId, actionContent, meetingId};
         this._vm.axios.post('/action', actionObj).then(result => {
             if(result.data.status == 0){
                 commit(SET_ACTION, actionObj);
