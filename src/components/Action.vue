@@ -106,7 +106,7 @@ export default {
             margin: 5px 0;
             line-height: 35px;
             padding-left: 5px;
-            font-size: 12px;
+            font-size: 16px;
             width: 100%;
             word-break : break-all; 
             // word-wrap: break-word;

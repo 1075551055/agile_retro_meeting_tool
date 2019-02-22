@@ -118,6 +118,14 @@ export default {
       draggedAreaType: constants.draggedAreaType
     };
   },
+   sockets: {
+      //if visit this component by router, mounted is triggered before sockets ,it cannot trigger socket 
+      // connect event, so need to trigger in mounted event again.
+      connect: function () {
+          console.log('socket connected');
+          this.$socket.emit('meetingConnect', this.$route.params.meetingId);
+      }
+  },
   components: {
     CommentCard
   },
@@ -142,6 +150,8 @@ export default {
       this.$store.dispatch('comment/getAllComments',{meetingId: this.$route.params.meetingId})
   },
   mounted: function() {
+    // trigger socket connect event
+    this.$socket.emit('connect');
     this.setDragDrop();
   },
 
@@ -229,6 +239,7 @@ export default {
             )[0];
             if (droppedAreaType !== commentObj.commentType) {
               self.$store.dispatch("comment/changeCommentType", {
+                meetingId: self.$route.params.meetingId,
                 commentId,
                 toCommentType: droppedAreaType
               });

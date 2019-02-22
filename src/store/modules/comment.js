@@ -43,8 +43,8 @@ const actions = {
             }
         })
     },
-    changeCommentType({commit}, {commentId, toCommentType}){
-        this._vm.axios.put('/comment/' + commentId, {commentId, commentType: toCommentType}).then(result => {
+    changeCommentType({commit}, {meetingId, commentId, toCommentType}){
+        this._vm.axios.put('/comment/' + commentId, {meetingId, commentId, commentType: toCommentType}).then(result => {
             // commit(CHANGE_COMMENT_TO_ANOTHER_COMMENTTYPE, {commentId, toCommentType});
         })
     },
