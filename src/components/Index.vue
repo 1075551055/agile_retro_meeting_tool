@@ -3,25 +3,39 @@
     <b-container>
       <b-row>
         <div class="retro-des">
-          <h1>Agile Retrospective Meeting</h1>
+          <div id="logo" class="logo">
+            <h1>
+              <a href="#">
+                <img src="../assets/logo.png" alt="">
+              </a>
+            </h1>
+          </div>
+          
+          <div class="are-you-ready">
+             <!-- <img src="../assets/are.png" alt="">
+             <img src="../assets/you.png" alt=""> -->
+             <img src="../assets/are_you_ready.png" alt=""> 
+          </div>
           <br>
           <b-button variant="secondary btn-lg" @click="createMeeting">start a meeting</b-button>
+          
           <loading :show="isLoading" :label="loadingLabel"></loading>
-
           <modal name="security-verify" :adaptive="true">
             <div class="security-content">
               <p>Please swipe to complete validation</p>
               <Verify :barSize="{width:'95%',height:'40px'}" @success="verifySuccess('success')" @error="verifyError('error')" :type="3" :showButton="false"></Verify>
             </div>
           </modal>
-
         </div>
       </b-row>
-      <b-row>
-        <div class="retro-bottom">
-          <img src="../assets/retro_index_bottom.png" alt>
-        </div>
-      </b-row>
+      <div class="contact-us">
+          <b-row>
+            <i>contact us:13824774439@163.com</i>
+          </b-row>
+          <b-row>
+            <a href="https://github.com/1075551055/agile_retro_meeting_tool">github: agile_retro_meeting_tool</a>
+          </b-row>
+      </div>
     </b-container>
   </div>
 </template>
@@ -73,23 +87,30 @@ export default {
 </script>
 
 <style lang="less" scoped>
+// container
 .container {
   min-height: 100vh;
-  background-color: #32a7b8;
-  // background-image: url('../assets/retro_bottom1.jpg');
-  // background-size: cover ;
-  .row {
-    height: 50vh;
-  }
+  background-color: #2AB561;
+  // background-size: 100% 100% ;
+  font-family: "kreon","Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;;
+  font-weight: 300;
+  color: #333;
   .row:first-child {
     display: flex;
     align-items: center;
     justify-content: center;
     div.retro-des {
-      h1 {
-        font-size: 50px;
-        color: #fff;
-        // margin: 0 auto;
+      .logo{
+        text-align: center;
+        img{
+          vertical-align: middle;
+        }
+      }
+      .are-you-ready{
+        img{
+          vertical-align: middle;
+          width: 100%;
+        }
       }
       button {
         color: #fff;
@@ -105,19 +126,22 @@ export default {
       }
     }
   }
-  .retro-bottom {
-    width: 100%;
-    height: 100%;
-    img {
-      // todo: adapt pc & mobile
-      width: 100%;
+  div.contact-us{
+    position: fixed;
+    right: 30px;
+    bottom: 20px;
+    i{
+      color: #fff;
+    }
+    a{
+      text-decoration: underline; 
+      color: #fff;
     }
   }
 }
 
 // security validation
 .security-content {
-  // border: 1px solid red;
   width: 96%;
   margin: 0 auto;
   p{
