@@ -115,10 +115,11 @@ export default {
     return {
       comment: constants.comment,
       commentType: constants.commentType,
-      draggedAreaType: constants.draggedAreaType
+      draggedAreaType: constants.draggedAreaType,
+      commentMaxLength: 500
     };
   },
-   sockets: {
+  sockets: {
       //if visit this component by router, mounted is triggered before sockets ,it cannot trigger socket 
       // connect event, so need to trigger in mounted event again.
       connect: function () {
@@ -144,6 +145,23 @@ export default {
       return this.$store.state.comment.allComments.filter(
         item => item.commentType === constants.commentType.suggestion
       );
+    }
+  },
+  watch:{
+    'comment.wellComment':function(newValue ,oldValue){
+       if(newValue.length > this.commentMaxLength){
+         this.comment.wellComment = newValue.substring(0, this.commentMaxLength);
+       }
+    },
+    'comment.notWellComment':function(newValue ,oldValue){
+       if(newValue.length > this.commentMaxLength){
+         this.comment.notWellComment = newValue.substring(0, this.commentMaxLength);
+       }
+    },
+    'comment.suggestionComment':function(newValue ,oldValue){
+       if(newValue.length > this.commentMaxLength){
+         this.comment.suggestionComment = newValue.substring(0, this.commentMaxLength);
+       }
     }
   },
   created: function(){

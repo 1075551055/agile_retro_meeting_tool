@@ -14,26 +14,6 @@
                         Are you sure to delete this item ? 
              </b-modal>
         </b-row>
-        <!-- <b-row>
-            <b-col cols="1">
-            </b-col>
-            <b-col cols="8">
-                <b-form-textarea
-                        v-model="actionContent"
-                        placeholder="Enter something"
-                        :max-rows="6">
-                </b-form-textarea>
-            </b-col>
-            <b-col cols="2">
-                <button type="button" class="btn btn-success btn-lg" @click="addAction">
-                    add
-                </button>
-                <b-modal v-model="deleteModalShow" @ok="handleOkForDeleteAction">
-                        Are you sure to delete this item ? 
-                </b-modal>
-            </b-col>
-            
-        </b-row> -->
         <b-row>
             <b-col cols="1">
             </b-col>
