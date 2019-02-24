@@ -98,6 +98,7 @@ export default {
     overflow: auto;
     outline: none;
     resize: none;
+    padding-bottom: 30px;
   }
   &:hover{
     .operations{
