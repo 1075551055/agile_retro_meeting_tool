@@ -12,9 +12,10 @@
           </div>
           
           <div class="are-you-ready">
-             <!-- <img src="../assets/are.png" alt="">
-             <img src="../assets/you.png" alt=""> -->
-             <img src="../assets/are_you_ready.png" alt=""> 
+             <transition @before-enter="areYouReadyBeforeEnter" @enter="areYouReadyEnter" @after-enter="areYouReadyAfterEnter">
+               <!-- <img src="../assets/are_you_ready.png" alt="" v-show="areYouReadyActive">  -->
+               <div v-show="areYouReadyActive"></div>
+             </transition>
           </div>
           <br>
           <b-button variant="secondary btn-lg" @click="createMeeting">start a meeting</b-button>
@@ -48,7 +49,8 @@ export default {
   data() {
     return {
       isLoading: false,
-      loadingLabel: "loading..."
+      loadingLabel: "loading...",
+      areYouReadyActive: false
     };
   },
   components: {
@@ -81,7 +83,24 @@ export default {
     },
     createMeeting() {
       this.$modal.show('security-verify');
+    },
+    areYouReadyBeforeEnter(el){
+      // el.style.transform = "translate(0,0)"
+      el.style.width = "0%";
+    },
+    areYouReadyEnter(el, done){
+      el.offsetWidth;
+      // el.style.transform = "translate(100px, 300px)";
+      el.style.width = "100%";
+      el.style.transition = "width 1s 1s steps(5)";
+      done();
+    },
+    areYouReadyAfterEnter(el){
+      // this.areYouReadyActive = false;
     }
+  },
+  mounted(){
+    this.areYouReadyActive = true;
   }
 };
 </script>
@@ -107,9 +126,21 @@ export default {
         }
       }
       .are-you-ready{
-        img{
-          vertical-align: middle;
-          width: 100%;
+        width: 336px;
+        // img{
+        //   vertical-align: middle;
+        //   width: 100%;
+          // width: 0%;
+          // &.active{
+          //   width: 100%;
+          //   transition: width 2s steps(5);
+          //   -webkit-transition: width 2s steps(5);
+          // }
+        // }
+        > div{
+          background-image: url("../assets/are_you_ready.png");
+          width: 336px;
+          height: 70px;
         }
       }
       button {
