@@ -34,7 +34,7 @@
 
 <script>
 export default {
-    data(){
+    data: function(){
         return {
             actionContent:'',
             deleteModalShow: false,
@@ -43,7 +43,7 @@ export default {
         }
     },
     computed:{
-        allActions(){
+        allActions: function(){
             return this.$store.state.action.allActions;
         }
     },
@@ -51,16 +51,16 @@ export default {
         this.$store.dispatch('action/getAllActions',{meetingId: this.$route.params.meetingId})
     },
     methods:{
-        addAction(){
+        addAction: function(){
             this.$store.dispatch('action/addAction', {actionContent: this.actionContent, meetingId: this.$route.params.meetingId});
             this.actionContent = "";
         },
-        deleteAction(index, acitonId){
+        deleteAction: function(index, acitonId){
             this.deleteModalShow = true;
             this.deletedActionIndex = index;
             this.deletedActionId = acitonId;
         },
-        handleOkForDeleteAction(evt){
+        handleOkForDeleteAction: function(evt){
             this.$store.dispatch('action/deleteAction', {index: this.deletedActionIndex, actionId: this.deletedActionId})
         }
     }

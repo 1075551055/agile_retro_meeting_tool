@@ -131,17 +131,17 @@ export default {
     CommentCard
   },
   computed: {
-    wellComments() {
+    wellComments: function() {
       return this.$store.state.comment.allComments.filter(
         item => item.commentType === constants.commentType.well
       );
     },
-    notWellComments() {
+    notWellComments: function() {
       return this.$store.state.comment.allComments.filter(
         item => item.commentType === constants.commentType.notWell
       );
     },
-    suggestionComments() {
+    suggestionComments: function() {
       return this.$store.state.comment.allComments.filter(
         item => item.commentType === constants.commentType.suggestion
       );

@@ -46,7 +46,7 @@ import loading from "vue-full-loading";
 import { uuid } from "vue-uuid";
 import Verify from 'vue2-verify';
 export default {
-  data() {
+  data: function() {
     return {
       isLoading: false,
       loadingLabel: "loading...",
@@ -58,7 +58,7 @@ export default {
     Verify
   },
   methods: {
-    verifySuccess(text) {
+    verifySuccess: function(text) {
         console.log(text);
         this.isLoading = true;
         // ajax create meeting
@@ -78,28 +78,28 @@ export default {
                   })
         }, 1000);
     },
-    verifyError(text) {
+    verifyError: function(text) {
         console.log(text);
     },
-    createMeeting() {
+    createMeeting: function() {
       this.$modal.show('security-verify');
     },
-    areYouReadyBeforeEnter(el){
+    areYouReadyBeforeEnter: function(el){
       // el.style.transform = "translate(0,0)"
       el.style.width = "0%";
     },
-    areYouReadyEnter(el, done){
+    areYouReadyEnter: function(el, done){
       el.offsetWidth;
       // el.style.transform = "translate(100px, 300px)";
       el.style.width = "100%";
-      el.style.transition = "width 1s 1s steps(5)";
+      el.style.transition = "width 1s .5s steps(5)";
       done();
     },
-    areYouReadyAfterEnter(el){
+    areYouReadyAfterEnter: function(el){
       // this.areYouReadyActive = false;
     }
   },
-  mounted(){
+  mounted: function(){
     this.areYouReadyActive = true;
   }
 };

@@ -74,7 +74,7 @@ export default {
       alert('Failed to copy texts')
     }
   },
-  mounted() {
+  mounted: function() {
     this.setDragStart();
   }
 };
