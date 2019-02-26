@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api/**':{
-        target: 'http://localhost:3000',
+        target: process.env.backendHttpUrl,
+        // target: 'http://localhost:3000',
         pathRewrite:{
           '^/api': ''
         }
