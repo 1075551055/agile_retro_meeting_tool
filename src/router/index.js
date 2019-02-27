@@ -5,7 +5,8 @@ import Action from '@/components/Action'
 import Comment from '@/components/Comment'
 import Index from '@/components/Index'
 import Main from '@/components/Main'
-import axiosUtil from '@/axios'
+// import axiosUtil from '@/axios'
+import axios from 'axios';
 
 Vue.use(Router)
 
@@ -70,7 +71,7 @@ export default new Router({
       }],
       // todo: when change comment & action need to detect
       beforeEnter: (to, from, next) => {
-        axiosUtil(this.a.app).validateMeetingId(to.params.meetingId).then(response => {
+        axios.get('/meeting/' +to.params.meetingId).then(response => {
           if (response.data.existing == -1) {
             next({ name: '404' })
           } 
