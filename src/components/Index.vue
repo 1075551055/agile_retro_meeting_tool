@@ -24,7 +24,8 @@
           <modal name="security-verify" :adaptive="true">
             <div class="security-content">
               <p>Please swipe to complete validation</p>
-              <Verify :barSize="{width:'95%',height:'40px'}" @success="verifySuccess('success')" @error="verifyError('error')" :type="3" :showButton="false"></Verify>
+              <!-- <Verify :barSize="{width:'95%',height:'40px'}" @success="verifySuccess('success')" @error="verifyError('error')" :type="3" :showButton="false"></Verify> -->
+              <Verify  @success="verifySuccess('success')" @error="verifyError('error')" :type="2" :showButton="true"></Verify>
             </div>
           </modal>
         </div>
@@ -184,6 +185,9 @@ export default {
     margin-top: 50px;
   }
 }
+
 </style>
+
+
 
 

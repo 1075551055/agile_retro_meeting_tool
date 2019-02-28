@@ -60,7 +60,6 @@
       <b-row>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
-            <a href class="iconfont icon-jiahao" @click.prevent="addComment('well')"></a>
             <b-form-textarea
               draggable="true"
               v-model="comment.wellComment"
@@ -70,11 +69,11 @@
               :data-commenttype="commentType.well"
               :data-dragged-area-type="draggedAreaType.fromInput"
             ></b-form-textarea>
+            <a href class="iconfont icon-jiahao" @click.prevent="addComment('well')"></a>
           </div>
         </b-col>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
-            <a href class="iconfont icon-jiahao" @click.prevent="addComment('notWell')"></a>
             <b-form-textarea
               draggable="true"
               v-model="comment.notWellComment"
@@ -84,11 +83,11 @@
               :data-commenttype="commentType.notWell"
               :data-dragged-area-type="draggedAreaType.fromInput"
             ></b-form-textarea>
+            <a href class="iconfont icon-jiahao" @click.prevent="addComment('notWell')"></a>
           </div>
         </b-col>
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
-            <a href class="iconfont icon-jiahao" @click.prevent="addComment('suggestion')"></a>
             <b-form-textarea
               draggable="true"
               v-model="comment.suggestionComment"
@@ -98,6 +97,7 @@
               :data-commenttype="commentType.suggestion"
               :data-dragged-area-type="draggedAreaType.fromInput"
             ></b-form-textarea>
+            <a href class="iconfont icon-jiahao" @click.prevent="addComment('suggestion')"></a>
           </div>
         </b-col>
       </b-row>
@@ -366,14 +366,14 @@ export default {
             -webkit-justify-content: center;
             justify-content: center;
             > textarea {
-              display: block;
-              max-height: 220px;
-              width: calc(100% - 60px);
-              width: -webkit-calc(100% - 60px);
-              width: -moz-calc(100% - 60px);
-              max-width: calc(100% - 60px);
-              margin-left: 15px;
-              overflow: auto;
+              // display: block;
+              // max-height: 220px;
+              // width: calc(100% - 60px);
+              // width: -webkit-calc(100% - 60px);
+              // width: -moz-calc(100% - 60px);
+              // max-width: calc(100% - 60px);
+              // margin-left: 15px;
+              // overflow: auto;
               outline: none;
               border-radius: 5px;
               resize: none;
@@ -386,6 +386,7 @@ export default {
             > a {
               display: inline;
               padding-left: 6px;
+              padding-right: 6px;
               font-size: 30px;
               color: #aaa;
               text-decoration: none;
