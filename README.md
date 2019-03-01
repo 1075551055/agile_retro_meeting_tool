@@ -5,6 +5,7 @@
 # functions
 
 > 1. you can drag the comment textarea and card(html5 drag event);
+> 2. card can refresh automatically, no need to refresh ui to load data.(Vue-Socket.io)
 
 ## Build Setup
 
