@@ -1,6 +1,10 @@
 # agile_retro_meeting_tool
 
-> A Vue.js project
+> A Vue.js project. This is a Vue application for agile developement retrospective meeting, you can write "well", "not well", "suggestion" card online for the meeting, so no need write card by paper.
+
+# functions
+
+> 1. you can drag the comment textarea and card(html5 drag event);
 
 ## Build Setup
 
