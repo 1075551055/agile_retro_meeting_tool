@@ -4,8 +4,9 @@
 
 # functions
 
-> 1. you can drag the comment textarea and card(html5 drag event);
+> 1. you can input "well","not well","suggestion" comment or drag the comment textarea to relative areas, also you can drag the card everywhere(html5 drag event);
 > 2. card can refresh automatically, no need to refresh ui to load data.(Vue-Socket.io)
+> 3. you can input the action for next iteration.
 
 ## Build Setup
 
@@ -38,3 +39,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 > 1. create a meeting in index page first;
 > 2. then copy the url send to teammates, everyone can write cards under this link(pls note: one link one meeting)
+
+# Web application online address
+
+http://agileretro.top
