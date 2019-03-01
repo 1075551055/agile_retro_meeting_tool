@@ -33,3 +33,7 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## How to use
+> 1.create a meeting in index page first;
+> 2.then copy the url send to teammates, everyone can write cards under this link(pls note: one link one meeting)
