@@ -119,7 +119,13 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+
+    // intro.js
+    new webpack.ProvidePlugin({
+      // other modules
+      introJs: ['intro.js', 'introJs']
+    })
   ]
 })
 

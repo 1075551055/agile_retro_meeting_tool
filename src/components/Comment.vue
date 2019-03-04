@@ -17,7 +17,8 @@
     </b-container>
     <!-- content -->
     <b-container class="content">
-      <b-row>
+      <b-row v-intro-autostart="autostart"
+            v-intro-autostart.config="autostartConfig" v-intro="'you can drag cards in these area(您可以拖拽这里区域生成的任何卡片)'">
         <b-col class="summary-comment-col" :data-commenttype="commentType.well">
           <!-- bind commentId and commentContent, then tranfer to child component:CommentCard -->
           <transition-group name="fadeUp">
@@ -57,7 +58,9 @@
             </transition-group>
         </b-col>
       </b-row>
-      <b-row>
+      <b-row  v-intro-autostart="autostart"
+            v-intro-autostart.config="autostartConfig" v-intro="'you can drag these textareas(您可以拖拽这里的文本框到上面的well,not well,suggestion的任何区域)'" v-intro-step="1" v-intro-position="'top'">
+      <!-- <b-row>  -->
         <b-col class="comment-col">
           <div class="fake-textarea" draggable="true">
             <b-form-textarea
@@ -110,13 +113,20 @@
 import { uuid } from "vue-uuid";
 import CommentCard from "./CommentCard";
 import constants from "@/constants";
+import 'intro.js/introjs.css';
 export default {
   data: function() {
     return {
       comment: constants.comment,
       commentType: constants.commentType,
       draggedAreaType: constants.draggedAreaType,
-      commentMaxLength: 500
+      commentMaxLength: 500,
+      // intro.js config
+      autostart: true,
+      autostartConfig: {
+        nextLabel: '[next -->]'
+      }
+      // end intro.js config
     };
   },
   sockets: {

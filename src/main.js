@@ -16,13 +16,17 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueClipboard from 'vue-clipboard2'
 import VModal from 'vue-js-modal'
+import VueIntro from 'vue-introjs'
+import 'intro.js/introjs.css';
 
 Vue.use(UUID)
 Vue.use(BootstrapVue)
-Vue.use(VueClipboard)
-Vue.use(VModal)
 Vue.use(VueAxios, axios)
 axios.defaults.baseURL = 'api'
+Vue.use(VueClipboard)
+Vue.use(VModal)
+Vue.use(VueIntro)
+
 // Vue.use(VueResource)
 // Vue.use(VueTouch, {name: 'v-touch'})
 // VueTouch.config.swipe = {
@@ -32,8 +36,8 @@ import VueSocketIO from 'vue-socket.io'
 
 Vue.use(new VueSocketIO({
     debug: process.env.NODE_ENV !== 'production',
+    connection: 'http://localhost:3000',
     // for production
-     connection: 'http://agileretro.top:3000',
     vuex: {
         store,
         actionPrefix: 'SOCKET_',
