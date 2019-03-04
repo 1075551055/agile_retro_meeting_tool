@@ -46,4 +46,4 @@ http://agileretro.top
 
 # backend api interface application
 
-Pls reference to https://github.com/1075551055/agile_retro_meeting_tool_backend
+Pls reference to https://github.com/1075551055/agile_retro_meeting_tool_backend (pls note:because use Vue-Socket.io, need to start backend application for listen 3000 port)
