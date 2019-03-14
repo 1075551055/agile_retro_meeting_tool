@@ -4,22 +4,41 @@
     <!-- header -->
     <b-container class="header">
       <b-row>
-        <b-col>
+        <b-col v-show="showWell">
           <i class="iconfont icon-biaoqing1"></i> Well
+          <a href="#" class="large" @click.prevent="enlargeCommentColArea('well')" v-show="showWell && !isLarge">
+             <i class="iconfont icon-fangda"></i>
+          </a>
+          <a href="#" class="small" @click.prevent="diminishCommentColArea" v-show="showWell && isLarge">
+             <i class="iconfont icon-icon--"></i>
+          </a>
         </b-col>
-        <b-col>
+        <b-col v-show="showNotWell">
           <i class="iconfont icon-biaoqing-nanguo"></i>Not Well
+          <a href="#" class="large" @click.prevent="enlargeCommentColArea('notWell')" v-show="showNotWell && !isLarge">
+             <i class="iconfont icon-fangda"></i>
+          </a>
+           <a href="#" class="small" @click.prevent="diminishCommentColArea" v-show="showNotWell && isLarge">
+             <i class="iconfont icon-icon--"></i>
+          </a>
         </b-col>
-        <b-col>
+        <b-col v-show="showSuggestions">
           <i class="iconfont icon-jianyi"></i>Suggestions
+          <a href="#" class="large" @click.prevent="enlargeCommentColArea('suggestions')" v-show="showSuggestions && !isLarge">
+             <i class="iconfont icon-fangda"></i>
+          </a>
+           <a href="#" class="small" @click.prevent="diminishCommentColArea" v-show="showSuggestions && isLarge">
+             <i class="iconfont icon-icon--"></i>
+          </a>
         </b-col>
       </b-row>
     </b-container>
     <!-- content -->
     <b-container class="content">
-      <b-row v-intro-autostart="autostart"
-            v-intro-autostart.config="autostartConfig" v-intro="'you can drag cards in these area(您可以拖拽这里区域生成的任何卡片)'">
-        <b-col class="summary-comment-col" :data-commenttype="commentType.well">
+      <!-- <b-row v-intro-autostart="autostart"
+            v-intro-autostart.config="autostartConfig" v-intro="'you can drag cards in these area(您可以拖拽这里区域生成的任何卡片)'"> -->
+      <b-row>  
+        <b-col class="summary-comment-col" :data-commenttype="commentType.well" v-show="showWell">
           <!-- bind commentId and commentContent, then tranfer to child component:CommentCard -->
           <transition-group name="fadeUp">
             <CommentCard
@@ -33,7 +52,7 @@
           </transition-group>
          
         </b-col>
-        <b-col class="summary-comment-col" :data-commenttype="commentType.notWell">
+        <b-col class="summary-comment-col" :data-commenttype="commentType.notWell" v-show="showNotWell">
             <transition-group name="fadeUp">
                 <CommentCard
                     v-show="notWellComments.length != 0"
@@ -45,7 +64,7 @@
                 ></CommentCard>
             </transition-group>
         </b-col>
-        <b-col class="summary-comment-col" :data-commenttype="commentType.suggestion">
+        <b-col class="summary-comment-col" :data-commenttype="commentType.suggestion" v-show="showSuggestions">
             <transition-group name="fadeUp">
                 <CommentCard
                     v-show="suggestionComments.length != 0"
@@ -58,10 +77,10 @@
             </transition-group>
         </b-col>
       </b-row>
-      <b-row  v-intro-autostart="autostart"
-            v-intro-autostart.config="autostartConfig" v-intro="'you can drag these textareas(您可以拖拽这里的文本框到上面的well,not well,suggestion的任何区域)'" v-intro-step="1" v-intro-position="'top'">
-      <!-- <b-row>  -->
-        <b-col class="comment-col">
+      <!-- <b-row  v-intro-autostart="autostart"
+            v-intro-autostart.config="autostartConfig" v-intro="'you can drag these textareas(您可以拖拽这里的文本框到上面的well,not well,suggestion的任何区域)'" v-intro-step="1" v-intro-position="'top'"> -->
+      <b-row> 
+        <b-col class="comment-col" v-show="showWell">
           <div class="fake-textarea" draggable="true">
             <b-form-textarea
               draggable="true"
@@ -75,7 +94,7 @@
             <a href class="iconfont icon-jiahao" @click.prevent="addComment('well')"></a>
           </div>
         </b-col>
-        <b-col class="comment-col">
+        <b-col class="comment-col" v-show="showNotWell">
           <div class="fake-textarea" draggable="true">
             <b-form-textarea
               draggable="true"
@@ -89,7 +108,7 @@
             <a href class="iconfont icon-jiahao" @click.prevent="addComment('notWell')"></a>
           </div>
         </b-col>
-        <b-col class="comment-col">
+        <b-col class="comment-col" v-show="showSuggestions">
           <div class="fake-textarea" draggable="true">
             <b-form-textarea
               draggable="true"
@@ -121,11 +140,15 @@ export default {
       commentType: constants.commentType,
       draggedAreaType: constants.draggedAreaType,
       commentMaxLength: 500,
+      showWell: true,
+      showNotWell: true,
+      showSuggestions: true,
+      isLarge: false
       // intro.js config
-      autostart: true,
-      autostartConfig: {
-        nextLabel: '[next -->]'
-      }
+      // autostart: true,
+      // autostartConfig: {
+      //   nextLabel: '[next -->]'
+      // }
       // end intro.js config
     };
   },
@@ -205,6 +228,22 @@ export default {
         this.comment.suggestionComment = "";
       }
       this.$store.dispatch("comment/addComment", payload);
+    },
+    enlargeCommentColArea: function(areaType){
+      if(areaType === 'well'){
+        this.showNotWell = this.showSuggestions = false;
+      }
+      if(areaType === 'notWell'){
+        this.showWell = this.showSuggestions = false;
+      }
+      if(areaType === 'suggestions'){
+        this.showWell = this.showNotWell = false;
+      }
+      this.isLarge = true;
+    },
+    diminishCommentColArea: function(){
+      this.showWell = this.showNotWell = this.showSuggestions = true;
+      this.isLarge = false;
     },
     onSwipeLeft: function(e) {
       // alert("left");
@@ -293,9 +332,9 @@ export default {
     flex: 1;
     display: flex;
     flex-direction: column;
-    @media screen and (max-width: 768px) {
+    // @media screen and (max-width: 300%) {
       overflow: hidden;
-    }
+    // }
 
     .header {
       &.container {
@@ -320,6 +359,25 @@ export default {
               border-right: none;
             }
             padding: 10px 0 10px;
+            position: relative;
+            a.large {
+              text-decoration: none;
+              position: absolute;
+              right: 2px;
+              top: 0;
+              .icon-fangda {
+                font-size: 32px;
+              }
+            }
+            a.small {
+              text-decoration: none;
+              position: absolute;
+              right: 2px;
+              top: 0;
+             .icon-icon--{
+               font-size: 32px;
+             }
+            }
           }
         }
       }
@@ -359,7 +417,7 @@ export default {
           @media screen and (max-width: 768px) {
             border-right: none;
           }
-          max-width: 33.3333333333333%;
+          // max-width: 33.3333333333333%;
           .fake-textarea {
             border: 1px solid #ccc;
             border-radius: 8px;
@@ -376,14 +434,6 @@ export default {
             -webkit-justify-content: center;
             justify-content: center;
             > textarea {
-              // display: block;
-              // max-height: 220px;
-              // width: calc(100% - 60px);
-              // width: -webkit-calc(100% - 60px);
-              // width: -moz-calc(100% - 60px);
-              // max-width: calc(100% - 60px);
-              // margin-left: 15px;
-              // overflow: auto;
               outline: none;
               border-radius: 5px;
               resize: none;

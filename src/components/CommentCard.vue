@@ -92,6 +92,8 @@ export default {
     display: inline-block;
     // border: 1px solid pink;
     box-shadow: 1px 2px 3px #43a047;
+    background-color: #F5D12B;
+    color: #000;
     width: 100%;
     height: 100%;
     max-height: 145%;
