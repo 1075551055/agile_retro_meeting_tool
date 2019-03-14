@@ -84,7 +84,7 @@ export default {
 .card {
   width: 45%;
   height: 25%;
-  max-height: 220px;
+  max-height: 250px;
   display: inline-block;
   margin: 4px;
   position: relative;
