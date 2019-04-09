@@ -83,8 +83,8 @@ export default {
 <style lang="less" scoped>
 .card {
   width: 45%;
-  height: 25%;
-  max-height: 250px;
+  // height: 25%;
+  height: 210px;
   display: inline-block;
   margin: 4px;
   position: relative;
